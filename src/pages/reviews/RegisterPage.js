@@ -1,4 +1,4 @@
-import RegisterComponent from "../../components/reviews/RegisterComponent";
+import RegisterComponent from "../../components/reviews/register/RegisterComponent";
 
 const RegisterPage = () => {
   return (

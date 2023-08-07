@@ -1,7 +1,7 @@
 const ListComponent = () => {
   return (
     <div>
-      Component
+      h
     </div>
   );
 }

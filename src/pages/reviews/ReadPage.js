@@ -1,4 +1,4 @@
-import ReadComponent from "../../components/reviews/ReadComponent";
+import ReadComponent from "../../components/reviews/read/ReadComponent";
 
 const ReadPage = () => {
   return (
