@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getCookie, setCookie } from "../../util/cookieUtil"
 import queryString from "query-string"
-import { useSearchParams } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 
 const MyComponent = () => {
 
@@ -41,9 +41,15 @@ const MyComponent = () => {
 
 
 
+
+
   return (
     <div>
-      내 정보 페이지
+      <div><Link to={"/qna/list"}>1:1문의</Link></div>
+      <div> <Link to={"/review/list"}>내 리뷰 정보</Link></div>
+      <div> <Link to={"/order/list"}>내 주문 내역</Link></div>
+      <div> <Link to={"/member/update"}>내 정보 수정</Link></div>
+
     </div>
   );
 }
