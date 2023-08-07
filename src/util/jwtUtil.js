@@ -10,6 +10,7 @@ const beforeReq = (config) => {
   console.log("beforeRequest....................................", config)
 
   const {accessToken} = getCookie("login")
+  console.log("AccessToken 값: ",getCookie("login"))
 
   if(!accessToken){
     throw new Error("No ACCESS TOKEN")
@@ -60,6 +61,7 @@ const refreshJWT = async() => {
 
   const res = await axios.get(`http://localhost:8081/api/member/refresh?refreshToken=${refreshToken}`, header)
 
+  console.log("Refresh Token....................................", res)
   console.log(res.data)
 
   cookieValue.accessToken = res.data.accessToken

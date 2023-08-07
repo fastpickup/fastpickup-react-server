@@ -47,7 +47,7 @@ const loginSlice = createSlice({
       //console.log("fulfilled", action.payload)
       const {username, password, memberName, errorMsg} = action.payload
 
-      console.log("action.payload: "+action.payload)
+      console.log("action.payload: ", action.payload)
 
       if(errorMsg){
         state.errorMsg = errorMsg

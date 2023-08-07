@@ -1,4 +1,5 @@
 import axios from "axios"
+import jwtAxios from "../util/jwtUtil"
 import { createSearchParams } from "react-router-dom"
 
 // List
@@ -8,7 +9,7 @@ export const listQna = async (queryObj) => {
     const queryString = createSearchParams(queryObj)
 
     // QueryString을 axios.get 메소드 요청 URL 파라미터로 사용
-    const res = await axios.get(`http://localhost:8081/api/qna/list?${queryString}`)
+    const res = await jwtAxios.get(`http://localhost:8081/api/qna/list?${queryString}`)
 
     return res.data
 
