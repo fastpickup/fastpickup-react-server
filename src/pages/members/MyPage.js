@@ -3,10 +3,6 @@ import queryString from 'query-string';
 import { getCookie, setCookie } from "../../util/cookieUtil";
 import { useEffect, useState } from "react";
 
-
-
-
-
 const MyPage = () => {
   return (
     <div>

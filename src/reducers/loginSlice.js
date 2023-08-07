@@ -62,12 +62,12 @@ const loginSlice = createSlice({
     })
     //pending 작업중
     .addCase(postLoginThunk.pending, (state, action) => {
-      console.log("pending", action.payload)
+      //console.log("pending")
       state.loading = true
     })
     //rejected 예외 발생 (200코드 아님)
     .addCase(postLoginThunk.rejected, (state, action) => {
-      console.log("rejected", action.payload)
+      //console.log("rejected")
     })
   }
 })
