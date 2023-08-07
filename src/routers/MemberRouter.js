@@ -20,7 +20,7 @@ const MemberRouter = ({Loading}) => {
       element: <Suspense fallback={Loading}><Member_My/></Suspense>
     },
     {
-      path: "update/:email",
+      path: "update",
       element: <Suspense fallback={Loading}><Member_Update/></Suspense>
     }
   ]);
