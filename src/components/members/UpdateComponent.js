@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { deleteMember, getMember, getMemberUpdate, postMemberUpdate } from "../../api/memberAPI";
 import { getCookie } from "../../util/cookieUtil";
 import { json, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 const initState = {
@@ -70,28 +71,6 @@ const UpdateComponent = () => {
     navigate("/")
   }
 
-  // KakaoPay
-  const handleKakaoPayClick = () => {
-    fetch('http://localhost:8081/joon/pay/kakaopay.cls', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.result && data.result !== "NO") {
-          // 카카오페이 페이지로 리다이렉트 코드 추가
-          // 예: window.location.href = data.next_redirect_url;
-        } else {
-          alert("카카오페이 결제 준비 실패");
-        }
-      })
-      .catch(error => {
-        alert("에러가 발생했습니다. 다시 시도해 주세요.");
-        console.error(error);
-      });
-  };
 
 
 
@@ -124,10 +103,6 @@ const UpdateComponent = () => {
 
       <div>
         <button onClick={handleDeleteClick}>회원 탈퇴</button>
-      </div>
-
-      <div>
-        <button onClick={handleKakaoPayClick}>카카오페이로 결제하기</button>
       </div>
 
     </div>
