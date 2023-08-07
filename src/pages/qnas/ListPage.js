@@ -18,7 +18,7 @@ const ListPage = () => {
 
   return (
     <div>
-      <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc]">제목</div>
+      <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc]">내 1:1 문의 목록</div>
       <ListComponent queryObj={queryObj} moveRead={moveRead} movePage={movePage}></ListComponent>
     </div>
   );
