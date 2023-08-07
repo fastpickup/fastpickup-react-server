@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { listStore } from "../../api/storeAPI";
 import ListPageComponent from "../common/ListPageComponent";
+import { useSelector } from "react-redux";
 
 const initState = {
   list: [],
@@ -21,7 +22,13 @@ const ListComponent = ({ movePage, moveRead, queryObj }) => {
 
   const [storeList, setStoreList] = useState(initState);
 
-  const categoryName = "치킨";
+  const [params] = useSearchParams()
+
+  const cate = params.get("cate")
+  console.log("카테고리명: ",cate)
+
+  const categoryName = decodeURIComponent(cate);
+  console.log("카테고리명: ",categoryName)
 
   // Store List 
   useEffect(() => {
