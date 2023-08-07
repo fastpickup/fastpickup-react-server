@@ -1,7 +1,7 @@
 const ListComponent = () => {
   return (
     <div>
-      Component
+      상품 리스트 컴포넌트
     </div>
   );
 }

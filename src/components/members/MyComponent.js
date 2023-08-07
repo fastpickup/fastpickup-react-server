@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import { getCookie, setCookie } from "../../util/cookieUtil"
 import queryString from "query-string"
 import { Link, useSearchParams } from "react-router-dom"
+import { getMemberREad } from "../../api/memberAPI"
+
+
 
 const MyComponent = () => {
 
