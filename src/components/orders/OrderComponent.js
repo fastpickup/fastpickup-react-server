@@ -27,7 +27,7 @@ const OrderComponent = ({pno}) => {
   }, [pno])
 
   //console.log(pno)
-  //console.log(order)
+  console.log(order)
 
   const handleClickInc = () => {
     dispatch(inc(1))

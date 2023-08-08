@@ -3,6 +3,7 @@ import { Suspense, lazy } from "react";
 const Order_List = lazy(() => import("../pages/orders/ListPage"))
 const Order_Read = lazy(() => import("../pages/orders/ReadPage"))
 const Order_Order = lazy(() => import("../pages/orders/OrderPage"))
+const Order_Complete = lazy(() => import("../pages/orders/CompletePage"))
 
 const OrderRouter = ({Loading}) => {
   return ([
@@ -17,6 +18,10 @@ const OrderRouter = ({Loading}) => {
     {
       path: "order/:pno",
       element: <Suspense fallback={Loading}><Order_Order/></Suspense>
+    },
+    {
+      path: "complete",
+      element: <Suspense fallback={Loading}><Order_Complete/></Suspense>
     }
   ]);
 }
