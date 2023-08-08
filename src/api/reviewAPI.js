@@ -26,3 +26,15 @@ export const getReivewSelectOne = async(rno, queryObj) => {
     return res.data
 
 }
+
+// file upload
+export const uploadFile = async(formData) => {
+    
+    //http header 타입 지정
+    const header = {headers: {"Content-Type": "multipart/form-data"}}
+
+    const res = await jwtAxios.post(`http://localhost:8081/api/files/upload`,formData, header)
+
+    return res.data
+
+}
