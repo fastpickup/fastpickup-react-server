@@ -13,32 +13,70 @@ const initState = {
 
 const UpdateComponent = ({qno, moveRead, moveList}) => {
 
-  const [qnaData, setQnaData] = useState(initState)
+  const [qna, setQna] = useState(initState)
 
   useEffect(() => {
     readQna(qno).then(data => {
-      setQnaData(qno)
+      console.log(data)
+      setQna(data)
     })
-  })
+  }, [qno])
 
   const handleClickUpdate = () => {
-    updateQna(qno).then(data => {
+    updateQna(qna).then(data => {
       alert("수정 되었습니다.")
       moveRead(qno)
     })
   }
 
   const handleChange = (e) => {
-    qnaData[e.target.name] = e.target.value
-    setQnaData({...qnaData})
+    qna[e.target.name] = e.target.value
+    setQna({...qna})
 
   }
 
   return (
     <div>
-      Component
-    </div>
-  );
+<div className="m-2 p-2 border-2 rounded-md bg-gray-100">
+  <p className="text-lg text-gray-800">문의 번호 : {qna.qno}</p>
+</div>
+
+<div className="m-2 p-2 border-2 rounded-md bg-gray-100">
+  <p className="text-lg text-gray-800">문의자 : {qna.email}</p>
+</div>
+
+<div className="m-2 p-2 border-2 bg-gray-100 rounded-md"> 문의 제목 :
+  <input
+    type="text" 
+    name="qnaTitle"
+    value={qna.qnaTitle}
+    onChange={handleChange}
+    className="w-full px-3 py-2 border rounded-md mt-2 "
+  />
+</div>
+
+<div className="m-2 p-2 border-2 bg-gray-100 rounded-md"> 문의 내용 :
+  <input 
+    type="text" 
+    name="qnaContent"
+    value={qna.qnaContent}
+    onChange={handleChange}
+    className="w-full px-3 py-2 border rounded-md mt-2"
+  />
+</div>
+
+
+  <div className="flex justify-end">
+    <button className="bg-blue-500 text-white font-bold py-2 px-4 m-2 rounded-sm" onClick={handleClickUpdate}>
+      수정
+    </button>
+
+    <button className="bg-gray-800 text-white font-bold py-2 px-4 m-2 rounded-sm" onClick={moveList}>
+      목록
+    </button>
+  </div>
+</div>
+);
 }
 
 export default UpdateComponent;
