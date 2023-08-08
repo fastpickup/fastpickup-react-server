@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import { getOrderList } from "../../api/productAPI";
+import { useDispatch } from "react-redux";
+import { dec, inc } from "../../reducers/countSlice";
+import OrderButtonComponent from "./OrderButtonComponent";
 
 const initState = {
   fileNames: [],
   productName: "",
   productContent: "",
   productPrice: 0,
-  storeName: ""
+  storeName: "",
+  email: ""
 }
 
 const OrderComponent = ({pno}) => {
 
   const [order, setOrder] = useState(initState)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     getOrderList(pno).then(data => {
@@ -22,6 +28,14 @@ const OrderComponent = ({pno}) => {
 
   //console.log(pno)
   //console.log(order)
+
+  const handleClickInc = () => {
+    dispatch(inc(1))
+  }
+
+  const handleClickDec = () => {
+    dispatch(dec(1))
+  }
 
   return (
     <div>
@@ -37,11 +51,23 @@ const OrderComponent = ({pno}) => {
       </ul>
       <div>{order.productName}</div>
       <div>{order.productContent}</div>
-      <div>{order.productPrice}</div>
+      <div>{(order.productPrice).toLocaleString()}</div>
       <div>{order.storeName}</div>
+      {/* 가맹점 email <div>{order.email}</div> */}
       <div>
-        
+        <button
+          onClick={handleClickInc}
+        >
+          증가
+        </button>
+        <button
+          onClick={handleClickDec}
+        >
+          감소
+        </button>
       </div>
+
+      <OrderButtonComponent {...order}></OrderButtonComponent>
     </div>
   );
 }

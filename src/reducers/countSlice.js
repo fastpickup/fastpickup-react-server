@@ -9,18 +9,19 @@ const countSlice = createSlice({
   initialState: initState,
   reducers: {
     inc: (state, param) => {
-
-      if(state > 10){
+      console.log("INC: ", state, param.payload)
+      if(state.qty > 9){
         return
       }
 
-      return state++
+      return {qty: state.qty + param.payload}
     },
     dec: (state, param) => {
-      if(state < 1){
+      console.log("DEC: ", state, param.payload)
+      if(state.qty < 2){
         return
       }
-      return state--
+      return {qty: state.qty - param.payload}
     }
   }
 })

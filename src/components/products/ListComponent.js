@@ -42,7 +42,7 @@ const ListComponent = ({sno, queryObj, movePage, moveRead}) => {
             onClick={() => handleClickOrder(pno)}
           >
             <div>{productName}</div>
-            <div>{productPrice}</div>
+            <div>{productPrice.toLocaleString()}</div>
             <div>{registDate}</div>
             <div>{recStatus === 1 ? "추천상품" : ""}</div>
             <div>{likeCount}</div>
