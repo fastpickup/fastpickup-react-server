@@ -1,7 +1,7 @@
 const ListPageComponent = ({movePage, startNum, endNum, prevBtn, nextBtn, pageNums, page}) => {
 
   const handleClickPage = (pageNum) => {
-    movePage(page)
+    movePage(pageNum)
   }
 
   return (
