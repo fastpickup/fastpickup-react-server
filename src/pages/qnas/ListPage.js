@@ -4,7 +4,7 @@ import useQueryObj from "../../hooks/useQueryObj";
 const ListPage = () => {
 
       // Custom hooks 사용
-      const {queryObj , setSearch , moveRead , moveList} = useQueryObj()
+      const {queryObj , setSearch , moveRead} = useQueryObj()
 
       // 페이지 넘어가는 함수
       const movePage= (num) => {
