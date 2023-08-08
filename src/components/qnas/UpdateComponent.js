@@ -22,7 +22,7 @@ const UpdateComponent = ({qno, moveRead, moveList}) => {
   })
 
   const handleClickUpdate = () => {
-    updateQna(qna).then(data => {
+    updateQna(qno).then(data => {
       alert("수정 되었습니다.")
       moveRead(qno)
     })

@@ -24,3 +24,7 @@ const countSlice = createSlice({
     }
   }
 })
+
+export const { inc, dec } = countSlice.actions
+
+export default countSlice.reducer
