@@ -17,6 +17,8 @@ const OrderComponent = ({pno}) => {
 
   const [order, setOrder] = useState(initState)
 
+  console.log('오더컴포넌트',order)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -53,7 +55,7 @@ const OrderComponent = ({pno}) => {
       <div>{order.productContent}</div>
       <div>{(order.productPrice).toLocaleString()}</div>
       <div>{order.storeName}</div>
-      {/* 가맹점 email <div>{order.email}</div> */}
+      <div>{order.email}</div>
       <div>
         <button
           onClick={handleClickInc}
