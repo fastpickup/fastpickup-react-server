@@ -59,7 +59,7 @@ const refreshJWT = async() => {
     }
   }
 
-  const res = await axios.get(`http://localhost:8081/api/member/refresh?refreshToken=${refreshToken}`, header)
+  const res = await axios.post(`http://localhost:8081/api/member/refresh?refreshToken=${refreshToken}`, header)
 
   console.log("Refresh Token....................................", res)
   console.log(res.data)
