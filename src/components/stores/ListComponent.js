@@ -25,10 +25,10 @@ const ListComponent = ({ movePage, moveRead, queryObj }) => {
   const [params] = useSearchParams()
 
   const cate = params.get("cate")
-  console.log("카테고리명: ",cate)
+  //console.log("카테고리명: ",cate)
 
   const categoryName = decodeURIComponent(cate);
-  console.log("카테고리명: ",categoryName)
+  //console.log("카테고리명: ",categoryName)
 
   // Store List 
   useEffect(() => {

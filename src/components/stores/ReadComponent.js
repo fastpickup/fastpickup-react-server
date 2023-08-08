@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import ListComponent from "../products/ListComponent";
 import { useEffect, useState } from "react";
 import { readStoreApi } from "../../api/storeAPI";
+import useQueryObj from "../../hooks/useQueryObj";
 
 const initState = {
   sno: '',
@@ -14,6 +15,8 @@ const initState = {
 
 const ReadComponent = () => {
 
+  const { setSearch, queryObj, moveRead } = useQueryObj();
+
   const {sno} = useParams();
 
   const [readStore, setReadStore] = useState(initState)
@@ -25,6 +28,11 @@ const ReadComponent = () => {
       setReadStore(res)
     })
   }, [sno])
+  
+  const movePage = (num) => {
+    queryObj.page = num
+    setSearch({ ...queryObj })
+  }
 
   return (
     <div>
@@ -51,8 +59,13 @@ const ReadComponent = () => {
 
 
     <div>
-    상품 리스트
-    <ListComponent></ListComponent>
+      상품 리스트
+      <ListComponent
+        sno={sno}
+        queryObj={queryObj}
+        movePage={movePage}
+        moveRead={moveRead}
+      ></ListComponent>
     </div>
       
     </div>
