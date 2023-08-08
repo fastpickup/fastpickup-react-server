@@ -1,4 +1,4 @@
-import UpdateComponent from "../../components/reviews/update/UpdateComponent";
+import UpdateComponent from "../../components/reviews/UpdateComponent";
 
 const UpdatePage = () => {
   return (

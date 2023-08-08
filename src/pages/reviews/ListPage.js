@@ -1,5 +1,5 @@
-import ListComponent from "../../components/reviews/list/ListComponent";
-import ListSearchComponent from "../../components/reviews/list/ListSearchComponent";
+import ListComponent from "../../components/reviews/ListComponent";
+import ListSearchComponent from "../../components/reviews/ListSearchComponent";
 import useQueryObj from "../../hooks/useQueryObj";
 
 const ListPage = () => {
@@ -31,7 +31,7 @@ const ListPage = () => {
 
   return (
     <div>
-      <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc]">제목</div>
+      <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc]">내 리뷰 목록</div>
       <ListSearchComponent queryObj={queryObj} moveSearch={moveSearch}></ListSearchComponent>
       <ListComponent queryObj={queryObj} movePage={movePage} moveRead={moveRead}></ListComponent>
     </div>
