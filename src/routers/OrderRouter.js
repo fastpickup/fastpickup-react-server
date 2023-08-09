@@ -20,7 +20,7 @@ const OrderRouter = ({Loading}) => {
       element: <Suspense fallback={Loading}><Order_Order/></Suspense>
     },
     {
-      path: "complete",
+      path: "complete/:ono",
       element: <Suspense fallback={Loading}><Order_Complete/></Suspense>
     }
   ]);

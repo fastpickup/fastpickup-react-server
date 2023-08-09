@@ -27,7 +27,7 @@ export const getReivewSelectOne = async(rno, queryObj) => {
 
 }
 
-// file upload
+// upload File 
 export const uploadFile = async(formData) => {
     
     //http header 타입 지정
@@ -38,3 +38,23 @@ export const uploadFile = async(formData) => {
     return res.data
 
 }
+// remove File
+export const removeFile = async(fileName) => {
+
+    const res = await jwtAxios.delete(`http://localhost:8081/api/files/remove/${fileName}`)
+
+    return res.data
+
+}
+
+// reviewUpdate
+export const reivewUpdate = async(queryObj) => {
+
+    const queryString = createSearchParams(queryObj)
+
+    const res = await jwtAxios.put(`http://localhost:8081/api/review/update?${queryString}`)
+    
+    return res.data
+
+}
+
