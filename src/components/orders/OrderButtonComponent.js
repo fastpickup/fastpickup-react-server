@@ -14,6 +14,7 @@ const token = getCookie("Token");
   
   console.log("어드민 이메일:", email)
   console.log(count)
+  console.log("유저 이메일: :",userEmail.email)
 
   const user = {
     email: userEmail,
