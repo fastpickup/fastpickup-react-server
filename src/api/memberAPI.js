@@ -28,7 +28,7 @@ export const getMemberUpdate = async (email) => {
 
 // Post Api Member Create
 export const postMemberCreate = async (params) => {
-  const res = await jwtAxios.post(`http://localhost:8081/api/member/create`, params)
+  const res = await axios.post(`http://localhost:8081/api/member/create`, params)
   return res.data;
 }
 

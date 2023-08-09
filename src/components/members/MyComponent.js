@@ -56,22 +56,39 @@ const MyComponent = () => {
     measurementId: "G-TWRBB24Q37"
   };
 
+  useEffect(() => {
+    // Firebase 초기화
     const app = initializeApp(firebaseConfig);
     const messaging = getMessaging(app);
-    // 토큰 삭제
-    deleteToken(messaging).then(() => {
-      getToken(messaging, { vapidKey: `BM5dOQVKVrBlXo4fzzTzbAoY_2KbPLNl0Q2txRKBBVa69k5d0iP0Wxgip-1z9gNSqkI86VXcCQT7lMU9nHBqFDg` })
+  
+    // 로컬 스토리지에서 토큰 존재 여부 확인
+    const existingToken = localStorage.getItem('fcmToken');
+  
+    if (existingToken) {
+      // 토큰이 이미 존재하면 삭제 후 새 토큰 발급
+      deleteToken(messaging).then(() => {
+        getTokenAndSend(messaging, email);
+      });
+    } else {
+      // 최초 로그인 시 토큰 발급
+      getTokenAndSend(messaging, email);
+    }
+  }, []);
+  
+  // 토큰 발급 및 서버로 전송
+  const getTokenAndSend = (messaging, email) => {
+    getToken(messaging, { vapidKey: 'BM5dOQVKVrBlXo4fzzTzbAoY_2KbPLNl0Q2txRKBBVa69k5d0iP0Wxgip-1z9gNSqkI86VXcCQT7lMU9nHBqFDg' })
       .then((newToken) => {
         console.log('New token:', newToken);
-        console.log('EMAIL', email)
-        postUpdateTokenValue(newToken, email)
-        // 필요한 작업 수행, 예를 들어 토큰을 서버로 보내기 등
+        console.log('EMAIL', email);
+        postUpdateTokenValue(newToken, email);
+        // 토큰을 로컬 스토리지에 저장
+        localStorage.setItem('fcmToken', newToken);
       })
       .catch((err) => {
         console.error('Error getting new token', err);
       });
-  },);
-
+  };  
 
   const handlePayment = () => {
     axios.post('http://localhost:8081/kakaoPay/pay')
