@@ -7,15 +7,14 @@ import { useSelector } from "react-redux"
 // PageResponseDTO
 const initState = {
   list: [],
-  total: 0,
+  endNum: 0,
+  startNum: 0,
+  nextBtn: false,
+  prevBtn: false,
+  pageNums: [],
   page: 0,
   size: 0,
-  startNum: 0,
-  endNum: 0,
-  prevBtn: false,
-  nextBtn: false,
-  pageNum: []
-
+  requestDTO: null
 }
 
 
