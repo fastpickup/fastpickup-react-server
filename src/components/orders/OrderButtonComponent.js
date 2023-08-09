@@ -14,6 +14,7 @@ const token = getCookie("Token");
   
   console.log("어드민 이메일:", email)
   console.log(count)
+  console.log("유저 이메일: :",userEmail.email)
 
   const user = {
     email: userEmail,
@@ -30,7 +31,7 @@ const token = getCookie("Token");
     // FCM Message 
     createFcmOrderAndToken(message)
       .then(() => {
-        const payState = {pno, sno, email: userEmail, total: (productPrice * count.qty), orderCount: count.qty}
+        const payState = {pno, sno, email: userEmail.email, total: (productPrice * count.qty), orderCount: count.qty}
         //console.log(payState)
         const queryString = createSearchParams(payState).toString();
         axios.post(`http://localhost:8081/kakaoPay/pay?${queryString}`)

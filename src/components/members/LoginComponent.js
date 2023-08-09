@@ -18,6 +18,7 @@ const LoginComponent = () => {
   const navigate = useNavigate()
 
   const errorMsg = loginState.errorMsg
+  console.log("errorMsg: " + errorMsg)
 
   const handleChange = (e) => {
     console.log('a')
@@ -50,7 +51,7 @@ const LoginComponent = () => {
           onClick={() => {
             dispatch(postLoginThunk(loginInfo)).then(() => {
               //console.log(loginInfo)
-              navigate("/")
+              //navigate("/")
             })
           }}
         >

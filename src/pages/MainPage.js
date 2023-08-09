@@ -29,16 +29,23 @@ const MainPage = () => {
 
   return (
     <BasicLayout>
-      <ul>
+      <ul className="flex flex-wrap px-2 mt-5">
         {cateList.list.map( ({categoryName}, idx) => 
-          <li key={idx}>
+          <li
+            key={idx}
+            className="w-1/3"
+          >
             <button
+              className="block w-full h-full text-center"
               type="button"
               onClick={() => {
                 handleClickStoreRead(categoryName)
               }}
             >
-              {categoryName}
+              <span className="block">
+                <img src={require(`../images/category_${categoryName}.png`)} className="inline-block w-[64px]" />
+              </span>
+              <span className="text-xl font-medium">{categoryName}</span>
             </button>
           </li>
         )}
