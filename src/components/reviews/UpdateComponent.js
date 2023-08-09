@@ -6,7 +6,6 @@ const initState = {
   reviewTitle: "",
   reviewContent: "",
   registDate: 0,
-  updateDate: 0,
   fileNames: [],
 };
 
@@ -44,7 +43,7 @@ const UpdateComponent = ({ rno, moveList, moveRead }) => {
 
   const handleClickUpdate = () => {
 
-    const formData = new FormData()
+    
 
   };
 
