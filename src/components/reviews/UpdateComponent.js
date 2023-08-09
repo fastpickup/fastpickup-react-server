@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { getReivewSelectOne, removeFile, uploadFile } from "../../api/reviewAPI";
+import {
+  getReivewSelectOne,
+  reivewUpdate,
+  removeFile,
+  removeReview,
+  updateReview,
+  uploadFile,
+} from "../../api/reviewAPI";
 
 const initState = {
   rno: 0,
@@ -32,24 +39,30 @@ const UpdateComponent = ({ rno, moveList, moveRead }) => {
   const handleClickDelImg = (fname) => {
     const newArr = review.fileNames.filter((ele) => ele !== fname);
 
-    console.log(fname)
-
     review.fileNames = newArr;
 
     setReview({ ...review });
 
-    removeFile(fname)
+    removeFile(fname);
   };
 
   const handleClickUpdate = () => {
+    updateReview(review).then((res) => {
+      console.log(res);
 
-    
+      moveRead(rno);
+    });
+  };
 
+  const handleClickRemove = () => {
+    removeReview(rno).then((res) => {
+      moveList();
+    });
   };
 
   // 파일 업로드
   const handleChangeFile = () => {
-    const formData = new FormData()
+    const formData = new FormData();
 
     // // 이미 업로드된 파일명 추가
     // if (review.fileNames) {
@@ -59,9 +72,9 @@ const UpdateComponent = ({ rno, moveList, moveRead }) => {
     // }
 
     // // 새로 추가되는 파일 추가
-    const arr = fileRef.current.files
+    const arr = fileRef.current.files;
     for (let file of arr) {
-      formData.append("files", file)
+      formData.append("files", file);
     }
 
     console.dir(fileRef.current);
@@ -69,89 +82,104 @@ const UpdateComponent = ({ rno, moveList, moveRead }) => {
     // uploadFile 함수를 호출하여 파일 업로드
     uploadFile(formData)
       .then((res) => {
-        const result = res
-        console.log(result)
+        const result = res;
+        console.log(result);
 
-        const link = result.map((item) => item.link)
-        const upDatefileNames = link.map((link) => link.substring(2)) // "s_" 제외한 부분 추출
+        const link = result.map((item) => item.link);
+        const upDatefileNames = link.map((link) => link.substring(2)); // "s_" 제외한 부분 추출
 
-        console.log(upDatefileNames)
-        const updatedFileNames = [...review.fileNames, ...upDatefileNames]
+        console.log(upDatefileNames);
+        const updatedFileNames = [...review.fileNames, ...upDatefileNames];
 
         // 상태 업데이트
         setReview({
           ...review,
-          fileNames: updatedFileNames
-        })
-
+          fileNames: updatedFileNames,
+        });
       })
       .catch((error) => {
-        console.error("File upload error:", error)
-      })
+        console.error("File upload error:", error);
+      });
 
-      fileRef.current.value = null
-
+    fileRef.current.value = null;
   };
 
   return (
     <div>
-      <div className="m-2 p-2 border-2">{review.rno}</div>
-      <div className="m-2 p-2 border-2">{review.reviewDate}</div>
+      <div className="m-2 p-2 border-2 bg-gray-100 rounded-lg">
+        <div className="m-2 p-2 border-b-2">
+          <span className="font-bold pr-1">Date</span> {review.reviewDate}
+        </div>
 
-      <div className="m-2 p-2 border-2">
-        <input
-          type="text"
-          name="reviewTitle"
-          value={review.reviewTitle}
-          onChange={handleChange}
-        ></input>
-      </div>
-      <div className="m-2 p-2 border-2">
-        <input
-          type="text"
-          name="reviewContent"
-          value={review.reviewContent}
-          onChange={handleChange}
-        ></input>
-      </div>
+        <div className="m-2 p-2 border-b-2 flex">
+        <span className="font-bold pr-3">Title</span>
+          <input
+            type="text"
+            name="reviewTitle"
+            value={review.reviewTitle}
+            onChange={handleChange}
+            className="w-full border-0 bg-gray-100"
+          ></input>
+        </div>
+        
+        <div className="m-2 p-2 border-b-2 flex">
+          <span className="font-bold pr-2">Content  </span>
+          <textarea
+            name="reviewContent"
+            value={review.reviewContent}
+            onChange={handleChange}
+            className="w-full border-0 bg-gray-100"
+          />
+        </div>
 
-      <div className="m-2 p-2 border-2">
-        <input
-          type="file"
-          ref={fileRef}
-          multiple
-          name="fileName"
-          onChange={handleChangeFile}
-        ></input>
-      </div>
+        <div className="m-2 p-2 border-b-2">
+          <input
+            type="file"
+            ref={fileRef}
+            multiple
+            name="fileName"
+            onChange={handleChangeFile}
+          ></input>
+        </div>
 
-      <div className="m-2 p-2 border-2">
-        <ul className="list-none flex">
-          {review.fileNames.map((fname, idx) => (
-            <li key={idx} className="m-2">
-              <button
-                className="bg-gray-500 m-2 p-2 text-white"
-                onClick={() => handleClickDelImg(fname)}
-              >
-                X
-              </button>
-              <img src={`http://localhost/s_${fname}`}></img>
-            </li>
-          ))}
-        </ul>
-      </div>
+        <div className="m-2 p-2 border-b-2">
+          <ul className="list-none flex">
+            {review.fileNames.map((fname, idx) => (
+              <li key={idx} className="m-2">
+                <button
+                  className="bg-gray-500 m-2 p-2 text-white"
+                  onClick={() => handleClickDelImg(fname)}
+                >
+                  X
+                </button>
+                <img src={`http://localhost/s_${fname}`}></img>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <div className="flex justify-end">
-        <button className="bg-blue-500 text-white font-bold py-2 px-4 m-2 rounded-sm">
-          수정
-        </button>
+        <div className="flex justify-end">
+          <button
+            className="bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-sm"
+            onClick={handleClickUpdate}
+          >
+            수정
+          </button>
 
-        <button
-          className="bg-gray-800 text-white font-bold py-2 px-4 m-2 rounded-sm"
-          onClick={moveList}
-        >
-          목록
-        </button>
+          <button
+            className="bg-red-700 text-white font-bold py-2 px-4 m-2 rounded-sm"
+            onClick={handleClickRemove}
+          >
+            삭제
+          </button>
+
+          <button
+            className="bg-gray-700 text-white font-bold py-2 px-4 m-2 rounded-sm"
+            onClick={() => moveRead(rno)}
+          >
+            리뷰 상세
+          </button>
+        </div>
       </div>
     </div>
   );

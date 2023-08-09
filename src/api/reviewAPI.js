@@ -2,7 +2,7 @@ import axios from "axios"
 import jwtAxios from "../util/jwtUtil"
 import { createSearchParams } from "react-router-dom"
 
-// List
+// Review List
 export const getReviewList = async (email ,queryObj) => {
 
     // queryObj를 URL 쿼리 문자열로 변환한 후 문자열로 저장
@@ -15,13 +15,21 @@ export const getReviewList = async (email ,queryObj) => {
 
 }
 
-// Read
+// Read Review
 
 export const getReivewSelectOne = async(rno, queryObj) => {
 
     const queryString = createSearchParams(queryObj)
 
     const res = await jwtAxios.get(`http://localhost:8081/api/review/read/${rno}?${queryString}`)
+    
+    return res.data
+}
+
+// regist Review
+export const registReview = async(param) => {
+
+    const res = await jwtAxios.post(`http://localhost:8081/api/review/regist`, param)
     
     return res.data
 
@@ -47,12 +55,19 @@ export const removeFile = async(fileName) => {
 
 }
 
-// reviewUpdate
-export const reivewUpdate = async(queryObj) => {
+// update review
+export const updateReview = async(param) => {
 
-    const queryString = createSearchParams(queryObj)
+    const res = await jwtAxios.put(`http://localhost:8081/api/review/update`, param)
+    
+    return res.data
 
-    const res = await jwtAxios.put(`http://localhost:8081/api/review/update?${queryString}`)
+}
+
+// remove review
+export const removeReview = async(rno) => {
+
+    const res = await jwtAxios.put(`http://localhost:8081/api/review/remove/${rno}`)
     
     return res.data
 
