@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { getMessaging, getToken, onMessage, deleteToken } from "firebase/messaging";
 import { getAnalytics } from "firebase/analytics";
 import { setCookie } from "./util/cookieUtil";
 
@@ -16,20 +16,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
-getToken(messaging, {
-  vapidKey: `BM5dOQVKVrBlXo4fzzTzbAoY_2KbPLNl0Q2txRKBBVa69k5d0iP0Wxgip-1z9gNSqkI86VXcCQT7lMU9nHBqFDg`,
-})
-  .then((currentToken) => {
-    if (currentToken) {
-      console.log("Client Token: ", currentToken);
-      setCookie("Token", currentToken, 1);
-    } else {
-      console.log("Failed to generate the app registration token.");
-    }
-  })
-  .catch((err) => {
-    console.log("An error occurred when requesting to receive the token.", err);
-  });
+// // 토큰 삭제
+// deleteToken(messaging).then(() => {
+//   // 토큰 다시 가져오기
+//   getToken(messaging, { vapidKey: `BM5dOQVKVrBlXo4fzzTzbAoY_2KbPLNl0Q2txRKBBVa69k5d0iP0Wxgip-1z9gNSqkI86VXcCQT7lMU9nHBqFDg` })
+//     .then((newToken) => {
+//       console.log('New token:', newToken);
+//     })
+//     .catch((err) => {
+//       console.error('Error getting new token', err);
+//     });
+// });
 
 export const onMessageListener = () =>
   new Promise((resolve) => {

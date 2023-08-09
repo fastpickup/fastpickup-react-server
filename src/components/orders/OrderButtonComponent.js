@@ -28,8 +28,10 @@ const token = getCookie("Token");
 
   const handlePayment = () => {
     // FCM Message 
+    console.log('Sending FCM message:', message); // 메시지 내용 출력
     createFcmOrderAndToken(message)
-      .then(() => {
+      .then(response => {
+        console.log('FCM message sent successfully:', response); // 성공 응답 출력
         const payState = {pno, sno, email: userEmail, total: (productPrice * count.qty), orderCount: count.qty}
         //console.log(payState)
         const queryString = createSearchParams(payState).toString();
