@@ -60,17 +60,21 @@ const MyComponent = () => {
     // Firebase 초기화
     const app = initializeApp(firebaseConfig);
     const messaging = getMessaging(app);
-  
+
+    console.log("app", app)
+    console.log("메시지", messaging)
     // 로컬 스토리지에서 토큰 존재 여부 확인
     const existingToken = localStorage.getItem('fcmToken');
-  
+
+    console.log("existingToken",existingToken)
     if (existingToken) {
-      // 토큰이 이미 존재하면 삭제 후 새 토큰 발급
-      deleteToken(messaging).then(() => {
+      deleteToken(messaging, existingToken).then(() => {
+        console.log(messaging, "삭제요청")
         getTokenAndSend(messaging, email);
       });
     } else {
       // 최초 로그인 시 토큰 발급
+      console.log("최초발급")
       getTokenAndSend(messaging, email);
     }
   }, []);
@@ -82,13 +86,11 @@ const MyComponent = () => {
         console.log('New token:', newToken);
         console.log('EMAIL', email);
         postUpdateTokenValue(newToken, email);
-        // 토큰을 로컬 스토리지에 저장
-        localStorage.setItem('fcmToken', newToken);
       })
       .catch((err) => {
         console.error('Error getting new token', err);
       });
-  };  
+  };
 
   const handlePayment = () => {
     axios.post('http://localhost:8081/kakaoPay/pay')
