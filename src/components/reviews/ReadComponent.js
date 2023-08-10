@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getReivewSelectOne } from "../../api/reviewAPI";
+import { getReivewSelectOne, getReviewStoreReview } from "../../api/reviewAPI";
 
-const initState = {
+const initStateMyReview = {
   rno: 0,
   reviewTitle: "",
   reviewContent: "",
@@ -10,30 +10,33 @@ const initState = {
   fileNames: [],
 };
 
+const initStateStoreReview = {
+  reviewDate: "",
+  reviewContent : ""
+}
+
+// const initState
+
 const ReadComponent = ({ rno, moveUpdate, moveList }) => {
-  const [review, setReview] = useState(initState);
+
+  const [review, setReview] = useState(initStateMyReview);
+
+  const [storeReview, setStoreReview] = useState(initStateStoreReview);
 
   useEffect(() => {
     getReivewSelectOne(rno).then((res) => {
-      console.log(res);
       setReview(res);
     });
 
-    // getProduct(pno)
-    //   .then((data) => {
-    //     setProduct(data);
+    getReviewStoreReview(rno).then(res => {
+      setStoreReview(res)
+    }) 
 
-    //     // 삭제 후 뒤로가기했을때 에러처리
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     moveList();
-    //   });
   }, [rno]);
 
   return (
     <div>
-      <div className="m-2 p-2 border-2 bg-gray-100 rounded-lg">
+      <div className="m-2 p-2 border-2  rounded-lg">
         <div className="m-2 p-2 border-b-2">
           <span className="font-bold">Date:</span> {review.reviewDate}
         </div>
@@ -64,7 +67,7 @@ const ReadComponent = ({ rno, moveUpdate, moveList }) => {
           <textarea
             name="reviewContent"
             value={review.reviewContent}
-            className="w-full h-40 border-0 bg-gray-100"
+            className="w-full h-40 border-0"
             readOnly
           />
         </div>
@@ -85,6 +88,31 @@ const ReadComponent = ({ rno, moveUpdate, moveList }) => {
           </button>
         </div>
       </div>
+
+      {/* 리뷰에 대한 가맹점 답글 */}
+      {storeReview.reviewDate && (
+        <div className="m-2 p-2 border-2 bg-gray-100 rounded-lg">
+          <div className="m-2 p-2 border-b-2">
+            <span className="font-bold">Date:</span> {storeReview.reviewDate}
+          </div>
+          <div className="m-2 p-2 border-b-2">
+            <span className="font-bold">Name:</span> 사장님
+          </div>
+          <div className="m-2 p-2 border-b-2">
+            <span className="font-bold">Title:</span> {storeReview.reviewTitle}
+          </div>
+          <div className="m-2 p-2 border-b-2">
+            <span className="font-bold">Content</span> <br />
+            <textarea
+              name="reviewContent"
+              value={storeReview.reviewContent}
+              className="w-full h-40 border-0 bg-gray-100"
+              readOnly
+            />
+          </div>
+        </div>
+      )}
+  
     </div>
   );
 };
