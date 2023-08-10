@@ -6,7 +6,7 @@ const Store_Read = lazy(() => import("../pages/stores/ReadPage"))
 const StoreRouter = ({Loading}) => {
   return ([
     {
-      path: "list",
+      path: "list/:categoryName",
       element: <Suspense fallback={Loading}><Store_List/></Suspense>
     },
     {

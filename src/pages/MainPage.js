@@ -16,7 +16,7 @@ const MainPage = () => {
 
   const handleClickStoreRead = (name) => {
     //dispatch(storeList(name))
-    navigate(`/store/list?cate=${encodeURIComponent(name)}`)
+    navigate(`/store/list/${encodeURIComponent(name)}`)
   }
 
   useEffect(() => {

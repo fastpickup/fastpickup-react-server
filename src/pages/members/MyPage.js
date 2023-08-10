@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const MyPage = () => {
   return (
     <div>
-      <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc]">제목</div>
+      <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc]">마이페이지</div>
       <MyComponent></MyComponent>
     </div>
   );

@@ -30,29 +30,26 @@ const JoinComponent = () => {
 
   return (
     <div>
-     <div>회원가입 페이지</div>
-     <div>
-        이메일:
-        <input type="email" name="email" value={member.email} required onChange={handleChange} />
-      </div>
-
-      <div>
-        이름:
-        <input type="text" name="memberName" value={member.memberName} required onChange={handleChange} />
-      </div>
-
-      <div>
-        패스워드:
-        <input type="password" name="memberPw" value={member.memberPw} required onChange={handleChange} />
-      </div>
-
-      <div>
-        전화번호:
-        <input type="text" name="memberPhone" value={member.memberPhone} required onChange={handleChange} />
-      </div>
-
-      <div>
-        <button onClick={handleClickSave}>회원 가입!</button>
+      <dl>
+        <dt className="mt-5">이메일</dt>
+        <dd className="mt-2">
+          <input className="w-full h-10 px-2 border border-[#ccc]" type="email" name="email" value={member.email} required onChange={handleChange} />
+        </dd>
+        <dt className="mt-5">이름</dt>
+        <dd className="mt-2">
+          <input className="w-full h-10 px-2 border border-[#ccc]" type="text" name="memberName" value={member.memberName} required onChange={handleChange} />
+        </dd>
+        <dt className="mt-5">비밀번호</dt>
+        <dd className="mt-2">
+          <input className="w-full h-10 px-2 border border-[#ccc]" type="password" name="memberPw" value={member.memberPw} required onChange={handleChange} />
+        </dd>
+        <dt className="mt-5">전화번호</dt>
+        <dd className="mt-2">
+          <input className="w-full h-10 px-2 border border-[#ccc]" type="text" name="memberPhone" value={member.memberPhone} required onChange={handleChange} />
+        </dd>
+      </dl>
+      <div className="mt-5">
+        <button className="block w-full h-10 leading-10 text-center text-white bg-[#ae2d33] rounded-md" onClick={handleClickSave}>회원 가입</button>
       </div>
     </div>
   );
