@@ -3,6 +3,7 @@ import ListComponent from "../products/ListComponent";
 import { useEffect, useState } from "react";
 import { readStoreApi } from "../../api/storeAPI";
 import useQueryObj from "../../hooks/useQueryObj";
+import ListByStoreComponent from "../reviews/ListByStoreComponent";
 
 const initState = {
   sno: '',
@@ -66,6 +67,9 @@ const ReadComponent = () => {
         movePage={movePage}
         moveRead={moveRead}
       ></ListComponent>
+
+      <ListByStoreComponent sno = {sno}></ListByStoreComponent>
+
     </div>
       
     </div>
