@@ -36,38 +36,33 @@ const ReadComponent = () => {
 
   return (
     <div>
-
-      <div>
-        스토어 Read Page
-        <div>
-          <label>가맹점 번호: </label>
-          {readStore.sno}
-        </div>
-        <div>
-          <label>가맹점 이름: </label>
-          {readStore.storeName}
-        </div>
-        <div>
-          <label>가맹점 전화번호: </label>
-          {readStore.storeNumber}
-        </div>
-        <div>
-          <label>가맹점 주소: </label>
-          {readStore.storeAddress}
-        </div>
+      <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc]">
+        {readStore.storeName}
       </div>
-
-
-    <div>
-      상품 리스트
-      <ListComponent
-        sno={sno}
-        queryObj={queryObj}
-        movePage={movePage}
-        moveRead={moveRead}
-      ></ListComponent>
-    </div>
-      
+      <dl className="mt-3">
+        <dt className="inline-block text-[18px] font-medium">
+          가맹점 전화번호 :
+        </dt>
+        <dd className="inline-block text-[17px] ml-2">
+          {readStore.storePhone}
+        </dd>
+      </dl>
+      <dl className="pb-3 border-b border-[#ccc]">
+        <dt className="inline-block text-[18px] font-medium">
+          가맹점 주소 :
+        </dt>
+        <dd className="inline-block text-[17px] ml-2">
+          {readStore.storeAddress}
+        </dd>
+      </dl>
+      <div>
+        <ListComponent
+          sno={sno}
+          queryObj={queryObj}
+          movePage={movePage}
+          moveRead={moveRead}
+        ></ListComponent>
+      </div>
     </div>
   );
 }

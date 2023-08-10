@@ -29,11 +29,11 @@ const MainPage = () => {
 
   return (
     <BasicLayout>
-      <ul className="flex flex-wrap px-2 mt-5">
+      <ul className="flex flex-wrap px-2">
         {cateList.list.map( ({categoryName}, idx) => 
           <li
             key={idx}
-            className="w-1/3"
+            className="w-1/3 mt-8 mb-2"
           >
             <button
               className="block w-full h-full text-center"

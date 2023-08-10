@@ -16,27 +16,22 @@ const initState = {
   requestDTO: null
 }
 
-const ListComponent = ({ movePage, moveRead, queryObj }) => {
+const ListComponent = ({ movePage, moveRead, queryObj, categoryName }) => {
 
   const navigate = useNavigate();
 
-  const [storeList, setStoreList] = useState(initState);
-
-  const [params] = useSearchParams()
-
-  const {categoryName} = useParams()
-  //console.log("카테고리명: ",cate)
+  const [storeList, setStoreList] = useState({...initState});
 
   //console.log("카테고리명: ",categoryName)
 
-  console.log(storeList)
+  console.log("storeList: ", storeList)
+  console.log("queryObj", queryObj)
 
   // Store List 
   useEffect(() => {
-    console.log(categoryName)
-    listStore(categoryName, queryObj).then(res => {
-      console.log(res)
-      setStoreList(res.list)
+    listStore(categoryName, queryObj).then(data => {
+      console.log("data", data)
+      setStoreList(data)
     })
   }, [categoryName, queryObj])
 
@@ -48,20 +43,24 @@ const ListComponent = ({ movePage, moveRead, queryObj }) => {
 
   return (
     <div>
-      <div>가맹점 리스트</div>
-      <div>
-        <ul>
-          {storeList.list.map(({ cno, sno, pno, categoryName, fileName }) => {
-            return (
-              <li key={sno}>
-                <div onClick={() => moveStoreRead(sno)}>가맹점 번호: {sno}</div>
-                <div>카테고리 명: {categoryName}</div>
-                <div><img src={`http://192/168.0.64/s_${fileName}`} /></div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <ul className="mt-5">
+        {storeList.list.map(({ sno, storeName, categoryName, fileName }) => {
+          return (
+            <li
+              key={sno}
+              className="mt-5 rounded-xl overflow-hidden shadow-custom"
+              onClick={() => moveStoreRead(sno)}
+            >
+              <div className="max-h-48 overflow-hidden">
+                <img className="w-full" src={`http://192.168.0.64/${fileName}`} />
+              </div>
+              <div className="p-5 min-h-[50px]">
+                <div className="text-[18px]">{storeName}</div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
       <ListPageComponent movePage={movePage} {...storeList}></ListPageComponent>
     </div>
 
