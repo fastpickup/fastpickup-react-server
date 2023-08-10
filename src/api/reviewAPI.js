@@ -2,7 +2,7 @@ import axios from "axios"
 import jwtAxios from "../util/jwtUtil"
 import { createSearchParams } from "react-router-dom"
 
-// Review List
+// My Review List
 export const getReviewList = async (email ,queryObj) => {
 
     // queryObj를 URL 쿼리 문자열로 변환한 후 문자열로 저장
@@ -15,8 +15,7 @@ export const getReviewList = async (email ,queryObj) => {
 
 }
 
-// Read Review
-
+// Read My Review
 export const getReivewSelectOne = async(rno, queryObj) => {
 
     const queryString = createSearchParams(queryObj)
@@ -25,6 +24,16 @@ export const getReivewSelectOne = async(rno, queryObj) => {
     
     return res.data
 }
+
+// Read My Review - StoreReview
+// 내가 쓴 리뷰의 대한 가맹점 답변
+export const getReviewStoreReview = async(rno) => {
+
+    const res = await jwtAxios.get(`http://localhost:8081/api/review/store/read/${rno}`)
+    
+    return res.data
+}
+
 
 // regist Review
 export const registReview = async(param) => {
