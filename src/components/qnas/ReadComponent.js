@@ -56,35 +56,42 @@ const ReadComponent = ({qno, moveList, moveUpdate}) => {
   }, [qno])
 
   return (
-<div >
-  <div className="max-w-md mx-auto border-2 border-gray-200 bg-white shadow-md p-6 rounded-md mt-4">
-  <div className="mb-4">
-    <h1 className="text-lg font-bold text-gray-800 mb-2">문의 정보</h1>
-    <div className="border-b border-gray-300"></div>
-  </div>
-  <div className="mb-4">
-    <p className="text-sm text-gray-600">문의번호: {readData.qno}</p>
-    <p className="text-sm text-gray-600">문의자: {readData.email}</p> 
-    <p className="text-sm text-gray-600">문의 일자: {readData.updateDate}</p>
-    <p className="text-sm text-gray-600">문의 제목: {readData.qnaTitle}</p>
-    <p className="text-sm text-gray-600">문의 내용: {readData.qnaContent}</p>
-  </div>
+<div>
+      <div className="m-2 p-2 border-2  rounded-lg">
+      <div className="m-2 p-2 border-b-2">
+          <span className="font-bold under">문의자:</span> {readData.email}
+        </div>
+        <div className="m-2 p-2 border-b-2">
+          <span className="font-bold">문의 날짜:</span> {readData.registDate}
+        </div>
+        <div className="m-2 p-2 border-b-2">
+          <span className="font-bold">문의 제목:</span> {readData.qnaTitle}
+        </div>
+
+        <div className="m-2 p-2 bg-white rounded-lg">
+        <label className=" text-gray-800 font-semibold mb-2">문의 내용:</label>
+        <textarea
+          name="qnaContent"
+          value={readData.qnaContent}
+          className="w-full px-4 py-2 border rounded-lg h-32 mt-3"
+          readOnly
+        ></textarea>
 
   <div className="mb-4 flex justify-end">
     <button
-      className="bg-blue-500 text-white font-bold py-2 px-4 rounded-sm text-sm"
+      className="bg-blue-500 text-white font-bold py-2 px-4 rounded-sm "
       onClick={() => moveUpdate(readData.qno)}
     >
       수정
     </button>
     <button
-      className="bg-gray-800 text-white font-bold py-2 px-4 rounded-sm text-sm ml-2"
+      className="bg-gray-800 text-white font-bold py-2 px-4 rounded-sm ml-2"
       onClick={moveList}
     >
       목록
     </button>
     <button
-      className="bg-red-800 text-white font-bold py-2 px-4 rounded-sm text-sm ml-2"
+      className="bg-red-800 text-white font-bold py-2 px-4 rounded-sm ml-2"
       onClick={handleClickDelete}
     >
       삭제
@@ -95,12 +102,23 @@ const ReadComponent = ({qno, moveList, moveUpdate}) => {
   <div className="max-w-md mx-auto border-2 border-red-700 bg-white shadow-md p-6 rounded-md mt-5">
     {reply.rno > 1 ? (
       <div>
-        <p className="text-lg font-bold text-gray-800 mb-2">등록된 답변</p>
-        <div className="border-b border-gray-300"></div>
-        <p className="text-sm text-gray-600">답변 작성자: {reply.email}</p>
-        <p className="text-sm text-gray-600">답변 내용: {reply.reply}</p>
-        <p className="text-sm text-gray-600">답변 일자: {reply.replyDate}</p>
-      </div>
+      <div className="m-2 p-2 border-b-2">
+      <span className="font-bold">답변자:</span> 관리자
+    </div>
+    <div className="m-2 p-2 border-b-2">
+      <span className="font-bold">답변 날짜:</span> {reply.replyDate}
+    </div>
+
+    <div className="m-2 p-2 border-b-2">
+      <span className="font-bold">답변 내용</span> <br />
+      <textarea
+        name="reviewContent"
+        value={reply.reply}
+        className="w-full h-40 border-0 mt-2"
+        readOnly
+      />
+    </div>
+    </div>
     ) : (
       <div>
         <p className="text-lg font-bold text-gray-800 mb-2">등록된 답변</p>
@@ -109,6 +127,7 @@ const ReadComponent = ({qno, moveList, moveUpdate}) => {
       </div>
     )}
   </div>
+</div>
 </div>
   );
 }
