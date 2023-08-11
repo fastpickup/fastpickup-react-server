@@ -26,12 +26,12 @@ const ListComponent = ({ queryObj, moveRead, movePage }) => {
 
   console.log(qnaList)
 
-  console.log(email)
+  //console.log(email)
 
   useEffect(() => {
     listQna(email, queryObj).then(data => {
-      console.log("-----------")
-      console.log(data)
+      //console.log("-----------")
+      //console.log(data)
 
       setQnaList(data)
 

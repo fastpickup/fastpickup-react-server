@@ -7,12 +7,15 @@ const initStateMyReview = {
   reviewContent: "",
   email: "",
   reviewDate: "",
+  storeName: "",
   fileNames: [],
 };
 
 const initStateStoreReview = {
   reviewDate: "",
-  reviewContent : ""
+  reviewContent : "",
+  reviewTitle: "",
+  storeName: ""
 }
 
 
@@ -36,79 +39,54 @@ const ReadComponent = ({ rno, moveUpdate, moveList }) => {
 
   return (
     <div>
-      <div className="m-2 p-2 border-2  rounded-lg">
-        <div className="m-2 p-2 border-b-2">
-          <span className="font-bold">Date:</span> <span>{review.reviewDate.split('T')[0]}</span>
-        </div>
-        <div className="m-2 p-2 border-b-2">
-          <span className="font-bold">Title:</span> {review.reviewTitle}
-        </div>
-
-        {review.fileNames.length > 0 ? (
-          <div className="m-2 p-2 border-b-2">
-            <ul className="list-none flex flex-wrap gap-2">
-              {review.fileNames.map((fname, idx) => (
-                <li key={idx}>
-                  <img
-                    src={`http://localhost/${fname}`}
-                    alt={`Review Image ${idx}`}
-                    className="w-20 h-20 object-cover rounded-md border"
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          <div className="m-2 p-2 border-b-2 text-center">No Images</div>
-        )}
-
-        <div className="m-2 p-2 border-b-2">
-          <span className="font-bold">Content</span> <br />
-          <textarea
-            name="reviewContent"
-            value={review.reviewContent}
-            className="w-full h-40 border-0"
-            readOnly
-          />
-        </div>
-
-        <div className="m-2 p-2 flex justify-end">
-          <button
-            className="bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-sm"
-            onClick={() => moveUpdate(review.rno)}
-          >
-            수정
-          </button>
-
-          <button
-            className="bg-gray-700 text-white font-bold py-2 px-4 m-2 rounded-sm"
-            onClick={moveList}
-          >
-            목록
-          </button>
-        </div>
+      {review.fileNames.length > 0 ? (
+        <ul className="overflow-x-auto overflow-y-hidden whitespace-nowrap mt-3">
+          {review.fileNames.map((fname, idx) => (
+            <li
+              key={idx}
+              className="inline-block ml-2 first:ml-0 w-[130px] h-[130px] border border-[#eee] rounded-md overflow-hidden"
+            >
+              <img
+                src={`http://localhost/${fname}`}
+                className="w-[130px]"
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <></>
+      )}
+      <div className="text-xl font-medium mt-3">
+        {review.reviewTitle}
+        <span className="text-[15px] font-normal text-[#5f5f5f] ml-2">{review.reviewDate.split('T')[0]}</span>
+      </div>
+      <div className="text-[#757575] mt-3">
+        {review.reviewContent}
+      </div>
+      <div className="flex mt-5 justify-end">
+        <button
+          className="w-20 h-10 border border-[#ae2d33] rounded-md mr-2"
+          onClick={moveList}
+        >
+          목록
+        </button>
+        <button
+          className="w-20 h-10 text-white bg-[#ae2d33] rounded-md"
+          onClick={() => moveUpdate(review.rno)}
+        >
+          수정
+        </button>
       </div>
 
       {/* 리뷰에 대한 가맹점 답글 */}
       {storeReview.reviewDate && (
-        <div className="m-2 p-2 border-2 bg-gray-100 rounded-lg">
-          <div className="m-2 p-2 border-b-2">
-            <span className="font-bold">Date:</span> {storeReview.reviewDate.split('T')[0]}
+        <div className="border p-5 mt-5 border-[#eee] bg-gray-100 rounded-md">
+          <div className="text-xl font-medium">
+            {storeReview.storeName}
+            <span className="text-[15px] font-normal text-[#5f5f5f] ml-2">{storeReview.reviewDate.split('T')[0]}</span>
           </div>
-          <div className="m-2 p-2 border-b-2">
-            <span className="font-bold">Name:</span> 사장님
-          </div>
-          <div className="m-2 p-2 border-b-2">
-            <span className="font-bold">Title:</span> {storeReview.reviewTitle}
-          </div>
-          <div className="m-2 p-2 border-b-2">
-            <span className="font-bold">Content</span> <br />
-            <textarea
-              name="reviewContent"
-              value={storeReview.reviewContent}
-              className="w-full h-40 border-0 bg-gray-100"
-              readOnly
-            />
+          <div className="text-[#757575] mt-3">
+            {storeReview.reviewContent}
           </div>
         </div>
       )}

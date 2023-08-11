@@ -32,7 +32,7 @@ const useQueryObj = () => {
   const queryObj = checkNull({page, size, type, keyword})
 
   //console.log("queryObj ---------------- ")
-  console.log(queryObj)
+  //console.log(queryObj)
 
   const moveList = () => {
     const queryString = createSearchParams(queryObj).toString()

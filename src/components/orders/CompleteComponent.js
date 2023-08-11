@@ -36,9 +36,9 @@ const CompleteComponent = () => {
     <div>
       <div className="text-[18px] font-medium mt-3 pb-3 border-b border-[#eee]">
         주문 번호: {readOrder.ono}
-        <span className="block text-sm font-normal">{readOrder.registDate.split('T')[0]}</span>
+        <span className="block text-sm font-normal text-[#5f5f5f]">{readOrder.registDate.split('T')[0]}</span>
       </div>
-      <div className="text-[18px] font-medium mt-3">
+      <div className="text-[18px] font-medium mt-3 mb-1">
         {readOrder.storeName}
       </div>
       <dl>
@@ -58,7 +58,7 @@ const CompleteComponent = () => {
         </dd>
       </dl>
       <div
-        className="py-3 mb-3 border-b border-[#eee] bg-gray-100"
+        className="py-3 px-1 mb-3 border-b border-[#eee] bg-gray-100"
       >
         <div className="flex">
           <div className="w-[120px] overflow-hidden rounded-full">

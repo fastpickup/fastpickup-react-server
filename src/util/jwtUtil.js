@@ -7,10 +7,10 @@ const jwtAxios = axios.create()
 //https://axios-http.com/kr/docs/interceptors
 //요청이 전달되기 전에 작업 수행
 const beforeReq = (config) => {
-  console.log("beforeRequest....................................", config)
+  //console.log("beforeRequest....................................", config)
 
   const {accessToken} = getCookie("login")
-  console.log("AccessToken 값: ",getCookie("login"))
+  //console.log("AccessToken 값: ",getCookie("login"))
 
   if(!accessToken){
     throw new Error("No ACCESS TOKEN")
@@ -23,7 +23,7 @@ const beforeReq = (config) => {
 
 //요청 오류가 있는 작업 수행
 const requestFail = (err) => {
-  console.log("requestFail....................................", err)
+  //console.log("requestFail....................................", err)
 
   return Promise.reject(err)
 }
@@ -31,17 +31,17 @@ const requestFail = (err) => {
 //2xx 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
 //응답 데이터가 있는 작업 수행
 const beforeRes = async(res) => {
-  console.log("2xx Response....................................", res)
+  //console.log("2xx Response....................................", res)
 
   if(res.data.error === "ERROR_ACCESS_TOKEN"){
-    console.log("Access Token has Expired")
+    //console.log("Access Token has Expired")
 
     const newAccessToken = await refreshJWT()
 
-    console.log("newAccessToken", newAccessToken);
+    //console.log("newAccessToken", newAccessToken);
     const originalRequest = res.config
 
-    console.log("오리지널리퀘스트", originalRequest)
+    //console.log("오리지널리퀘스트", originalRequest)
 
     originalRequest.headers.Authorization = `Bearer ${newAccessToken}`
 
@@ -68,8 +68,8 @@ const refreshJWT = async() => {
     }
   })
   
-  console.log("Refresh Token....................................", res)
-  console.log(res.data)
+  //console.log("Refresh Token....................................", res)
+  //console.log(res.data)
 
   cookieValue.accessToken = res.data.accessToken
   cookieValue.refreshToken = res.data.refreshToken
@@ -81,7 +81,7 @@ const refreshJWT = async() => {
 //2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
 //응답 오류가 있는 작업 수행
 const responseFail = (err) => {
-  console.log("response Fail....................................", err)
+  //console.log("response Fail....................................", err)
 
   return Promise.reject(err)
 }

@@ -46,24 +46,26 @@ const ListComponent = ({ movePage, moveRead, queryObj }) => {
 
   return (
     <div>
-      <div>
-        <ul>
-          {orderList.list.map(({ memberName, memberPhone, email, ono, pno, sno, registDate, productName, productPrice, fileName }) => (
-            <li key={ono}>
-              <div>주문자 이름:{memberName}</div>
-              <div>주문자 전화번호:{memberPhone}</div>
-              <div>이메일: {email}</div>
-              <div onClick={() => moveOrderRead(ono)}>주문 번호: {ono}</div>
-              <div>상품 번호: {pno}</div>
-              <div>가맹점 번호: {sno}</div>
-              <div>주문 날짜: {registDate}</div>
-              <div>상품 이름: {productName}</div>
-              <div>상품 가격: {productPrice}</div>
-              <div><img src={`http://192.168.0.64/s_${fileName}`} /></div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="mt-3">
+        {orderList.list.map(({ ono, pno, sno, registDate, productName, productPrice, fileName }) => (
+          <li
+            key={ono}
+            onClick={() => moveOrderRead(ono)}
+            className="flex pb-3 mb-3 border-b border-[#eee]"
+          >
+            <div className="overflow-hidden rounded-full">
+              <img src={`http://192.168.0.64/s_${fileName}`} />
+            </div>
+            <div className="flex w-[calc(100%-95px)] ml-[15px] items-center">
+              <div className="text-[17px] font-medium">
+                <div className="text-[15px] font-normal text-[#5f5f5f]">{registDate.split('T')[0]}</div>
+                <div>{productName}</div>
+                <div>{productPrice.toLocaleString()}원</div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
 
       <ListPageComponent movePage={movePage} {...orderList}></ListPageComponent>
     </div>

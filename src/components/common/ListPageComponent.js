@@ -8,7 +8,7 @@ const ListPageComponent = ({movePage, startNum, endNum, prevBtn, nextBtn, pageNu
     <div className="mt-10 px-5 border-3">
       <ul className="flex justify-center">
         {prevBtn ? <li
-          className="mx-3 px-2 h-8 flex items-center bg-[#ccc] border border-[#f4f4f2] text-white font-medium rounded"
+          className="mx-2 px-2 h-8 flex items-center bg-[#ccc] border border-[#f4f4f2] text-white font-medium rounded"
           onClick={() => handleClickPage(startNum - 1)}
         >
           &lt;
@@ -16,7 +16,7 @@ const ListPageComponent = ({movePage, startNum, endNum, prevBtn, nextBtn, pageNu
 
       {pageNums.map( num =>
         <li
-          className="mx-3 bg-[#ccc] border border-[#f4f4f2] text-white font-medium rounded"
+          className="mx-1 bg-[#ccc] border border-[#f4f4f2] text-white font-medium rounded"
           onClick={() => handleClickPage(num)}
           key={num}
         >
@@ -25,7 +25,7 @@ const ListPageComponent = ({movePage, startNum, endNum, prevBtn, nextBtn, pageNu
       )}
 
       {nextBtn ? <li
-          className="mx-3 px-2 h-8 flex items-center bg-[#ccc] border border-[#f4f4f2] text-white font-medium rounded"
+          className="mx-2 px-2 h-8 flex items-center bg-[#ccc] border border-[#f4f4f2] text-white font-medium rounded"
           onClick={() => handleClickPage(endNum + 1)}
         >
           &gt;

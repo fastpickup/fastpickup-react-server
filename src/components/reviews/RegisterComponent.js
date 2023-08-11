@@ -88,78 +88,72 @@ const RegisterComponent = ({moveList}) => {
 
   return (
     <div>
-    <div className="m-2 p-2 border-2 bg-gray-100 rounded-lg">
-      <div className="m-2 p-2 border-b-2">
-        <span className="font-bold pr-1">StoreName</span> {storeName}
-      </div>
-      <div className="m-2 p-2 border-b-2">
-        <span className="font-bold pr-1">ProductName</span> {productName}
-      </div>
-
-      <div className="m-2 p-2 border-b-2 flex">
-      <span className="font-bold pr-3">Title</span>
-        <input
-          type="text"
-          name="reviewTitle"
-          value={review.reviewTitle}
-          onChange={handleChange}
-          className="w-full border-0 bg-gray-100"
-        ></input>
-      </div>
-      
-      <div className="m-2 p-2 border-b-2 flex">
-        <span className="font-bold pr-2">Content  </span>
-        <textarea
-          name="reviewContent"
-          value={review.reviewContent}
-          onChange={handleChange}
-          className="w-full border-0 bg-gray-100"
-        />
-      </div>
-
-      <div className="m-2 p-2 border-b-2">
-        <input
-          type="file"
-          ref={fileRef}
-          multiple
-          name="fileName"
-          onChange={handleChangeFile}
-        ></input>
-      </div>
-
-      <div className="m-2 p-2 border-b-2">
-        <ul className="list-none flex">
-          {review.fileNames.map((fname, idx) => (
-            <li key={idx} className="m-2">
-              <button
-                className="bg-gray-500 m-2 p-2 text-white"
-                onClick={() => handleClickDelImg(fname)}
-              >
-                X
-              </button>
-              <img src={`http://localhost/s_${fname}`}></img>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="flex justify-end">
+      <dl>
+        <dt className="mt-5">가맹점명</dt>
+        <dd className="mt-2">
+          {storeName}
+        </dd>
+        <dt className="mt-5">상품명</dt>
+        <dd className="mt-2">
+          {productName}
+        </dd>
+        <dt className="mt-5">제목</dt>
+        <dd className="mt-2">
+          <input className="w-full h-10 px-2 border border-[#ccc]" type="text" name="reviewTitle" value={review.reviewTitle} required onChange={handleChange} />
+        </dd>
+        <dt className="mt-5">내용</dt>
+        <dd className="mt-2">
+          <textarea
+            name="reviewContent"
+            value={review.reviewContent}
+            onChange={handleChange}
+            className="w-full h-[100px] px-2 border border-[#ccc] resize-none"
+          />
+        </dd>
+        <dt className="mt-5">이미지</dt>
+        <dd className="mt-2">
+          <input
+            type="file"
+            ref={fileRef}
+            multiple
+            name="fileName"
+            onChange={handleChangeFile}
+          />
+        </dd>
+      </dl>
+      <ul className="overflow-x-auto overflow-y-hidden whitespace-nowrap mt-3 py-3">
+        {review.fileNames.map((fname, idx) => (
+          <li
+            key={idx}
+            className="relative inline-block ml-2 first:ml-0 w-[130px] h-[130px] border border-[#eee] rounded-md"
+          >
+            <button
+              className="bg-[#ae2d33] absolute -right-1 -top-2 w-7 h-7 text-white rounded-full"
+              onClick={() => handleClickDelImg(fname)}
+            >
+              X
+            </button>
+            <div className="overflow-hidden w-[130px] h-[130px]">
+              <img src={`http://192.168.0.64/${fname}`} className="w-[130px]" />
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div className="flex justify-end mt-5">
         <button
-          className="bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-sm"
-          onClick = {handleRegistReview}
+          className="w-20 h-10 text-white bg-[#ae2d33] rounded-md mr-2"
+          onClick={handleRegistReview}
         >
           등록
         </button>
-
         <button
-          className="bg-red-700 text-white font-bold py-2 px-4 m-2 rounded-sm"
-          onClick = {handleCancelBtn}
+          className="w-20 h-10 border border-[#ae2d33] rounded-md"
+          onClick={handleCancelBtn}
         >
           취소
         </button>
       </div>
     </div>
-  </div>
   );
 }
 

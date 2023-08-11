@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const HeaderNav = () => {
   const {email} = useSelector(state => state.login)
-  console.log("Email---------------------: " + email)
+  //console.log("Email---------------------: " + email)
   const navigate = useNavigate()
   if(email !== undefined){
     return (
