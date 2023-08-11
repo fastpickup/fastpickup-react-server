@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import ListPageComponent from "../common/ListPageComponent";
 import { getProductList } from "../../api/productAPI";
 import { useNavigate } from "react-router-dom";
+import jwtAxios from "../../util/jwtUtil"
+import { useSelector } from "react-redux";
 
 const initState = {
   list: [],
@@ -15,9 +17,16 @@ const initState = {
   requestDTO: null
 }
 
-const ListComponent = ({sno, queryObj, movePage, moveRead}) => {
+const initLike = {
+  like: 0
+}
+
+const ListComponent = ({ sno, queryObj, movePage, moveRead }) => {
 
   const [productList, setProductList] = useState(initState)
+  const [likeCounts, setLikeCounts] = useState(initLike.like);
+  const [userLikes, setUserLikes] = useState({});
+  const { email } = useSelector(state => state.login);
 
   const navigate = useNavigate()
 
@@ -25,17 +34,45 @@ const ListComponent = ({sno, queryObj, movePage, moveRead}) => {
     getProductList(sno, queryObj).then(data => {
       //console.log(data.list)
       setProductList(data)
+      // 내 좋아요 이슈 확인
+      data.list.forEach(product => {
+        checkUserLikeForProduct(product.pno, email);
+      });
     })
-  }, [queryObj])
+  }, [queryObj, email])
 
   const handleClickOrder = (pno) => {
     navigate(`/order/order/${pno}`)
   }
 
+  
+
+  // 전체 라이크 카운트 
+  const fetchLikeCountForProduct = async (pno) => {
+    console.log("전체 상품 라이크 카운트합니다: ", pno)
+    try {
+      const response = await jwtAxios.get(`http://localhost:8081/api/like/pno/${pno}/count`);
+      setLikeCounts(response.data.result);
+    } catch (error) {
+      console.error("Error fetching like count for product:", pno, error);
+    }
+  };
+
+  // 내가 좋아요 했나 체크 
+  const checkUserLikeForProduct = async (pno, email) => {
+    console.log('내가 좋아요 했나 확인합니다: ', pno, email)
+    try {
+      const response = await jwtAxios.get(`http://localhost:8081/api/like/pno/${pno}/${email}/check`);
+      setUserLikes(prev => ({ ...prev, [pno]: response.data.liked }));
+    } catch (error) {
+      console.error("Error checking user like for product:", pno, error);
+    }
+  };
+
   return (
     <div>
       <ul className="mt-3">
-        {productList.list.map(({pno, productName, productPrice, recStatus, fileName, likeCount}) => 
+        {productList.list.map(({ pno, productName, productPrice, recStatus, fileName, likeCount }) =>
           <li
             key={pno}
             onClick={() => handleClickOrder(pno)}
@@ -55,6 +92,8 @@ const ListComponent = ({sno, queryObj, movePage, moveRead}) => {
                 </div>
               </div>
             </div>
+
+
           </li>
         )}
       </ul>

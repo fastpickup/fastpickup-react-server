@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import ListComponent from "../products/ListComponent";
 import { useEffect, useState } from "react";
-import { readStoreApi } from "../../api/storeAPI";
+import { fetchStoreLikeCount, readStoreApi } from "../../api/storeAPI";
 import useQueryObj from "../../hooks/useQueryObj";
 import ListByStoreComponent from "../reviews/ListByStoreComponent";
 
@@ -10,17 +10,19 @@ const initState = {
   storeNumber: '',
   storeAddress: '',
   storePhone: '',
-  email:'',
-  storeName:''
+  email: '',
+  storeName: ''
 }
 
 const ReadComponent = () => {
 
   const { setSearch, queryObj, moveRead } = useQueryObj();
 
-  const {sno} = useParams();
+  const { sno } = useParams();
 
   const [readStore, setReadStore] = useState(initState)
+  const [likeCount, setLikeCount] = useState(0);
+
 
   useEffect(() => {
     //console.log('sno', sno)
@@ -28,8 +30,11 @@ const ReadComponent = () => {
       //console.log('가맹점 Read Data:', res)
       setReadStore(res)
     })
+    fetchStoreLikeCount(sno).then(res => {
+      setLikeCount(res.result)
+    })
   }, [sno])
-  
+
   const movePage = (num) => {
     queryObj.page = num
     setSearch({ ...queryObj })
@@ -56,6 +61,15 @@ const ReadComponent = () => {
           {readStore.storeAddress}
         </dd>
       </dl>
+      <dl className="pb-3 flex items-center">
+        <dt className="text-[18px] font-medium">
+          가맹점 좋아요 :
+        </dt>
+        <dd className="text-[17px] ml-2 flex items-center">
+          {likeCount}
+          <i className="ml-1 text-red-500 fas fa-heart"></i>
+        </dd>
+      </dl>
       <div>
         <ListComponent
           sno={sno}
@@ -64,12 +78,23 @@ const ReadComponent = () => {
           moveRead={moveRead}
         ></ListComponent>
       </div>
+<<<<<<< HEAD
     <div>
+=======
+      <div>
+        상품 리스트
+        <ListComponent
+          sno={sno}
+          queryObj={queryObj}
+          movePage={movePage}
+          moveRead={moveRead}
+        ></ListComponent>
+>>>>>>> 6244c31e24ad6c474b5ee245351e52c52ef19b05
 
-      <ListByStoreComponent sno = {sno}></ListByStoreComponent>
+        <ListByStoreComponent sno={sno}></ListByStoreComponent>
 
-    </div>
-      
+      </div>
+
     </div>
   );
 }
