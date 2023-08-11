@@ -8,7 +8,7 @@ const BasicLayout = ({children}) => {
 
   return (
     <>
-      <div className="fixed w-full h-[70px] bg-[#ae2d33]">
+      <div className="fixed w-full h-[70px] bg-[#ae2d33] shadow-lg">
         <button
           onClick={() => navigate(-1)}
           className="absolute left-0 top-0 w-10 h-[70px] flex justify-center items-center"

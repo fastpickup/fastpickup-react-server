@@ -23,9 +23,9 @@ const ReadComponent = () => {
   const [readStore, setReadStore] = useState(initState)
 
   useEffect(() => {
-    console.log('sno', sno)
+    //console.log('sno', sno)
     readStoreApi(sno).then(res => {
-      console.log('가맹점 Read Data:', res)
+      //console.log('가맹점 Read Data:', res)
       setReadStore(res)
     })
   }, [sno])
@@ -65,13 +65,6 @@ const ReadComponent = () => {
         ></ListComponent>
       </div>
     <div>
-      상품 리스트
-      <ListComponent
-        sno={sno}
-        queryObj={queryObj}
-        movePage={movePage}
-        moveRead={moveRead}
-      ></ListComponent>
 
       <ListByStoreComponent sno = {sno}></ListByStoreComponent>
 

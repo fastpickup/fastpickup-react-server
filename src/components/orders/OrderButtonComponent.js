@@ -12,9 +12,9 @@ const token = getCookie("Token");
   const count = useSelector(state => state.count)
   const userEmail = useSelector(state => state.login)
   
-  console.log("어드민 이메일:", email)
-  console.log(count)
-  console.log("유저 이메일: :",userEmail.email)
+  // console.log("어드민 이메일:", email)
+  // console.log(count)
+  // console.log("유저 이메일: :",userEmail.email)
 
   const user = {
     email: userEmail,
@@ -29,16 +29,16 @@ const token = getCookie("Token");
 
   const handlePayment = () => {
     // FCM Message 
-    console.log('Sending FCM message:', message); // 메시지 내용 출력
+    //console.log('Sending FCM message:', message); // 메시지 내용 출력
     createFcmOrderAndToken(message)
       .then(response => {
-        console.log('FCM message sent successfully:', response); // 성공 응답 출력
+        //console.log('FCM message sent successfully:', response); // 성공 응답 출력
         const payState = {pno, sno, email: userEmail.email, total: (productPrice * count.qty), orderCount: count.qty}
         //console.log(payState)
         const queryString = createSearchParams(payState).toString();
         axios.post(`http://localhost:8081/kakaoPay/pay?${queryString}`)
           .then(response => {
-            console.log('Response:', response.data);
+            //console.log('Response:', response.data);
             const url = response.data; // 서버로부터 받은 URL
             window.location.href = url; // 받은 URL로 리다이렉트
           })
@@ -52,11 +52,12 @@ const token = getCookie("Token");
   };
 
   return (
-    <div>
+    <div className="w-[calc(100%-125px)] h-[50px] bg-[#ae2d33] rounded-lg">
       <button
+        className="block text-center w-full px-3 leading-[50px] text-lg text-white font-medium"
         onClick={handlePayment}
       >
-        주문 금액: {(productPrice * count.qty).toLocaleString()}
+        <span className="text-xl">{(productPrice * count.qty).toLocaleString()}</span> 결제
       </button>
     </div>
   );

@@ -20,7 +20,7 @@ const initState = {
 const ListComponent = ({ movePage, moveRead, queryObj }) => {
 
   const { email } = useSelector(state => state.login)
-  console.log("회원 이메일", email)
+  //console.log("회원 이메일", email)
 
   const navigate = useNavigate();
 
@@ -31,22 +31,21 @@ const ListComponent = ({ movePage, moveRead, queryObj }) => {
   // }
 
   useEffect(() => {
-    console.log(email)
+    //console.log(email)
     getMyOrderAndHistory(email, queryObj).then(res => {
-      console.log(res)
+      //console.log(res)
       setOrderList(res.list)
     })
   }, [email, queryObj])
 
   // 주문 상세 페이지 가기
   const moveOrderRead = (ono) => {
-    console.log("Navigating to order", ono); 
+    //console.log("Navigating to order", ono); 
     navigate(`/order/read/${ono}`)
   }
 
   return (
     <div>
-      내 주문 이력
       <div>
         <ul>
           {orderList.list.map(({ memberName, memberPhone, email, ono, pno, sno, registDate, productName, productPrice, fileName }) => (
