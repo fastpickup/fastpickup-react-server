@@ -78,23 +78,7 @@ const ReadComponent = () => {
           moveRead={moveRead}
         ></ListComponent>
       </div>
-<<<<<<< HEAD
-    <div>
-=======
-      <div>
-        상품 리스트
-        <ListComponent
-          sno={sno}
-          queryObj={queryObj}
-          movePage={movePage}
-          moveRead={moveRead}
-        ></ListComponent>
->>>>>>> 6244c31e24ad6c474b5ee245351e52c52ef19b05
-
-        <ListByStoreComponent sno={sno}></ListByStoreComponent>
-
-      </div>
-
+      <ListByStoreComponent sno={sno}></ListByStoreComponent>
     </div>
   );
 }
