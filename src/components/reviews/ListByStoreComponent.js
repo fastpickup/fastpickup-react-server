@@ -9,84 +9,81 @@ const initState = {
     nextBtn: false,
     prevBtn: false,
     pageNums: [],
-    page: 0,
+    page: 1,
     size: 0,
     requestDTO: null,
 };
 
-const ListByStoreComponent = ({ sno, movePage }) => {
+const ListByStoreComponent = ({ sno }) => {
   const [storeReview, setStoreReview] = useState(initState);
 
   useEffect(() => {
-    getReviewByStore(sno).then((res) => {
+    getReviewByStore(sno, storeReview.page).then((res) => {
+
+      console.log(res)
+
       setStoreReview(res);
     });
-  }, [sno]);
+  }, [sno, storeReview.page]);
+
+  const movePage = (num) => {
+
+    storeReview.page = num
+    console.log(storeReview.page)
+    setStoreReview({...storeReview})
+
+  }
 
   return (
-    <div>
-        {storeReview.list.map(
-          ({
-            rno,
-            email,
-            reviewContent,
-            reviewTitle,
-            fileNames,
-            reviewDate,
-          }) => (
-
-
-    <div className="m-2 p-2 border-2  rounded-lg">
-             <div className="m-2 p-2 border-b-2">
-          <span className="font-bold">sno:</span> {sno}
-        </div>
-        <div className="m-2 p-2 border-b-2">
-          <span className="font-bold">Writer:</span> {email}
-        </div>
-        <div className="m-2 p-2 border-b-2">
-          <span className="font-bold">Date:</span> {reviewDate}
-        </div>
-        <div className="m-2 p-2 border-b-2">
-          <span className="font-bold">Title:</span> {reviewTitle}
-        </div>
-
-        {fileNames.length > 0 ? (
-          <div className="m-2 p-2 border-b-2">
-            <ul className="list-none flex flex-wrap gap-2">
-              {fileNames.map((fname, idx) => (
-                <li key={idx}>
-                  <img
-                    src={`http://localhost/${fname}`}
-                    alt={`Review Image ${idx}`}
-                    className="w-20 h-20 object-cover rounded-md border"
-                  />
-                </li>
-              ))}
-            </ul>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc] mt-5">리뷰</div>
+    {storeReview.list.map(
+      ({
+        rno,
+        gno,
+        email,
+        reviewContent,
+        reviewTitle,
+        fileNames,
+        reviewDate,
+      }) => (
+        <div
+          className={`p-4 border rounded-lg ${
+            rno === gno ? "bg-white" : "bg-gray-200"
+          } ${rno !== gno ? "ml-6" : ""}`}
+          key={rno}
+        >
+          <div className="mb-2 flex justify-between items-center">
+            <span className="text-sm text-gray-600 font-semibold">
+              {rno !== gno ? "사장님" : email}
+            </span>
+            <span className="text-sm text-gray-600">
+              {reviewDate}
+            </span>
           </div>
-        ) : (
-          <div></div>
-        )}
-
-        <div className="m-2 p-2 border-b-2">
-          <span className="font-bold">Content</span> <br />
-          <textarea
-            name="reviewContent"
-            value={reviewContent}
-            className="w-full h-40 border-0"
-            readOnly
-          />
+          {fileNames.length > 0 && (
+            <div className="mb-2">
+              <ul className="list-none flex flex-wrap gap-2">
+                {fileNames.map((fname, idx) => (
+                  <li key={idx}>
+                    <img
+                      src={`http://localhost/${fname}`}
+                      alt={`Review Image ${idx}`}
+                      className="w-20 h-20 object-cover rounded-md border"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <div>
+            <p className="text-sm text-gray-800">{reviewContent}</p>
+          </div>
         </div>
-        </div>
-
-
-            )
-        )}
-        <ListPageComponent
-        movePage={movePage}
-        {...storeReview}
-      ></ListPageComponent>
-    </div>
+      )
+    )}
+    <ListPageComponent {...storeReview} movePage={movePage}></ListPageComponent>
+  </div>
   );
 };
 

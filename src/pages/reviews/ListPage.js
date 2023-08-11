@@ -1,3 +1,4 @@
+import ListByStoreComponent from "../../components/reviews/ListByStoreComponent";
 import ListComponent from "../../components/reviews/ListComponent";
 import ListSearchComponent from "../../components/reviews/ListSearchComponent";
 import useQueryObj from "../../hooks/useQueryObj";
