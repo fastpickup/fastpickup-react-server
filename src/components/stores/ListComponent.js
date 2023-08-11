@@ -20,9 +20,11 @@ const ListComponent = ({ movePage, moveRead, queryObj, categoryName }) => {
 
   const navigate = useNavigate();
 
-  const [storeList, setStoreList] = useState({...initState});
+  const [storeList, setStoreList] = useState({ ...initState });
+ 
+  // const { sno } = useParams();
 
-  //console.log("카테고리명: ",categoryName)
+  // console.log("sno", sno);
 
   console.log("storeList: ", storeList)
   console.log("queryObj", queryObj)
@@ -32,8 +34,9 @@ const ListComponent = ({ movePage, moveRead, queryObj, categoryName }) => {
     listStore(categoryName, queryObj).then(data => {
       console.log("data", data)
       setStoreList(data)
-    })
-  }, [categoryName, queryObj])
+    });
+  }, [categoryName, queryObj]);
+
 
   // 가맹점 상세페이지 가기
   const moveStoreRead = (sno) => {
@@ -56,6 +59,7 @@ const ListComponent = ({ movePage, moveRead, queryObj, categoryName }) => {
               </div>
               <div className="p-5 min-h-[50px]">
                 <div className="text-[18px]">{storeName}</div>
+                {/* Likes: {likeCounts[sno] || 0} */}
               </div>
             </li>
           );
