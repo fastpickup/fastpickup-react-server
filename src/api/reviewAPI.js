@@ -22,7 +22,7 @@ export const getReviewByStore = async (sno, page = 2) => {
     // const queryString = createSearchParams(queryObj)
 
     // QueryString을 axios.get 메소드 요청 URL 파라미터로 사용
-    const res = await jwtAxios.get(`http://localhost:8081/api/review/store/${sno}?page=${page}`)
+    const res = await jwtAxios.get(`http://localhost:8081/api/review/store/${sno}?page=${page}&&size=${20}`)
 
     return res.data
 

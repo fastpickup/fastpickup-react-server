@@ -32,7 +32,7 @@ const ListByStoreComponent = ({ sno }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div>
       <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc] mt-5">
         리뷰
       </div>
@@ -47,7 +47,7 @@ const ListByStoreComponent = ({ sno }) => {
           reviewDate,
         }) => (
           <div
-            className={`p-4 border rounded-lg ${
+            className={`p-4 border rounded-lg mb-4 ${
               rno === gno ? "bg-white" : "bg-gray-200"
             } ${rno !== gno ? "ml-6" : ""}`}
             key={rno}
