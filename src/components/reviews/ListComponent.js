@@ -65,7 +65,7 @@ const ListComponent = ({ queryObj, movePage, moveRead }) => {
                 </div>
               </div>
               <div className="sm:flex sm:flex-col sm:items-end">
-                <p className="text-sm leading-6 text-gray-900">{reviewDate}</p>
+                <p className="text-sm leading-6 text-gray-900">{reviewDate.split('T')[0]}</p>
               </div>
             </li>
           )

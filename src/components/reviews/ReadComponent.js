@@ -15,7 +15,6 @@ const initStateStoreReview = {
   reviewContent : ""
 }
 
-// const initState
 
 const ReadComponent = ({ rno, moveUpdate, moveList }) => {
 
@@ -26,6 +25,7 @@ const ReadComponent = ({ rno, moveUpdate, moveList }) => {
   useEffect(() => {
     getReivewSelectOne(rno).then((res) => {
       setReview(res);
+
     });
 
     getReviewStoreReview(rno).then(res => {
@@ -38,7 +38,7 @@ const ReadComponent = ({ rno, moveUpdate, moveList }) => {
     <div>
       <div className="m-2 p-2 border-2  rounded-lg">
         <div className="m-2 p-2 border-b-2">
-          <span className="font-bold">Date:</span> {review.reviewDate}
+          <span className="font-bold">Date:</span> <span>{review.reviewDate.split('T')[0]}</span>
         </div>
         <div className="m-2 p-2 border-b-2">
           <span className="font-bold">Title:</span> {review.reviewTitle}
@@ -93,7 +93,7 @@ const ReadComponent = ({ rno, moveUpdate, moveList }) => {
       {storeReview.reviewDate && (
         <div className="m-2 p-2 border-2 bg-gray-100 rounded-lg">
           <div className="m-2 p-2 border-b-2">
-            <span className="font-bold">Date:</span> {storeReview.reviewDate}
+            <span className="font-bold">Date:</span> {storeReview.reviewDate.split('T')[0]}
           </div>
           <div className="m-2 p-2 border-b-2">
             <span className="font-bold">Name:</span> 사장님
