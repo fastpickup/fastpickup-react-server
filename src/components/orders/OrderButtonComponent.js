@@ -7,7 +7,7 @@ import { createFcmOrderAndToken } from "../../api/fcmTokenAPI";
 
 const OrderButtonComponent = ({pno, sno, productPrice, email}) => {
 
-const token = getCookie("Token");
+  const token = getCookie("Token");
 
   const count = useSelector(state => state.count)
   const userEmail = useSelector(state => state.login)
@@ -28,27 +28,17 @@ const token = getCookie("Token");
   }
 
   const handlePayment = () => {
-    // FCM Message 
-    //console.log('Sending FCM message:', message); // 메시지 내용 출력
-    createFcmOrderAndToken(message)
-      .then(response => {
-        //console.log('FCM message sent successfully:', response); // 성공 응답 출력
-        const payState = {pno, sno, email: userEmail.email, total: (productPrice * count.qty), orderCount: count.qty}
-        //console.log(payState)
-        const queryString = createSearchParams(payState).toString();
-        axios.post(`http://localhost:8081/kakaoPay/pay?${queryString}`)
-          .then(response => {
-            //console.log('Response:', response.data);
-            const url = response.data; // 서버로부터 받은 URL
-            window.location.href = url; // 받은 URL로 리다이렉트
-          })
-          .catch(error => {
-            console.error('There was an error calling the endpoint:', error);
-          });
-      })
-      .catch(error => {
-        console.error('There was an error sending the FCM message:', error);
-      });
+    const payState = {pno, sno, email: userEmail.email, total: (productPrice * count.qty), orderCount: count.qty}
+    //console.log(payState)
+    const queryString = createSearchParams(payState).toString();
+    axios.post(`http://localhost:8081/kakaoPay/pay?${queryString}`).then(response => {
+      //console.log('Response:', response.data);
+      const url = response.data; // 서버로부터 받은 URL
+      window.location.href = url; // 받은 URL로 리다이렉트
+    })
+    .catch(error => {
+      console.error('There was an error calling the endpoint:', error);
+    });
   };
 
   return (

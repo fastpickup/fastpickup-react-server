@@ -12,7 +12,7 @@ const ReadPage = () => {
 
   return (
     <div>
-      <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc]">문의 상세보기</div>
+      <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc]">문의 상세</div>
       <ReadComponent qno={qno} moveList={moveList} moveUpdate={moveUpdate}></ReadComponent>
     </div>
   );

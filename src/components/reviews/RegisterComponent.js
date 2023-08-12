@@ -107,7 +107,7 @@ const RegisterComponent = ({moveList}) => {
             name="reviewContent"
             value={review.reviewContent}
             onChange={handleChange}
-            className="w-full h-[100px] px-2 border border-[#ccc] resize-none"
+            className="w-full h-[100px] p-2 border border-[#ccc] resize-none"
           />
         </dd>
         <dt className="mt-5">이미지</dt>
