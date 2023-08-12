@@ -25,7 +25,7 @@ const CompleteComponent = () => {
   useEffect(() => {
     //console.log("ono", ono);
     readMyOrderAndHistory(ono).then((res) => {
-      console.log("내 주문정보 데이터: ", res);
+      //console.log("내 주문정보 데이터: ", res);
       const updatedOrder = { ...res.result, fileName: [res.result.fileName] };
       // const updatedOrder = { ...res.result, fileName: [res.result.fileName] };
       setReadOrder(updatedOrder);

@@ -24,7 +24,7 @@ const ListComponent = ({ queryObj, moveRead, movePage }) => {
 
   const { email } = useSelector(state => state.login)
 
-  console.log(qnaList)
+  //console.log(qnaList)
 
   //console.log(email)
 
@@ -41,36 +41,32 @@ const ListComponent = ({ queryObj, moveRead, movePage }) => {
 
   return (
     <div>
-      <div>
       <ul>
         {qnaList.list.map((dto) => (
             <li
             key={dto.qno}
             onClick={() => moveRead(dto.qno)}
-            className="flex justify-between gap-x-6 py-2"
+            className="flex justify-between py-2 border-b border-[#ddd]"
           >
-            <div className="flex gap-x-4">
-              <div className="min-w-0 flex-auto">
-                <p className="text-sm font-semibold leading-6 text-gray-900 ">
-                {dto.qno}
-                </p>
-                <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+            <div className="flex items-center w-[calc(100%-90px)]">
+              <div>
+                <div className="text-sm text-[#757575]">
+                  {dto.replyStatus === 0 ? "미답변" : <span className="text-[#ae2d33]">답변 완료</span>}
+                </div>
+                <div className="mt-1 truncate text-[16px]">
                   {dto.qnaTitle}
-                </p>
-
+                </div>
               </div>
             </div>
-            <div className="sm:flex sm:flex-col sm:items-end">
-              <p className="text-sm leading-6 text-gray-900">{dto.registDate}</p>
+            <div className="w-[80px]">
+              <p className="text-sm leading-6 text-gray-900">{dto.registDate.split('T')[0]}</p>
             </div>
           </li>
         ))}
       </ul>
       <div className="mt-4 flex justify-end"> 
-        <Link to="/qna/register" className="px-4 py-2 ml-3 bg-black text-white rounded-md">문의 등록</Link> {/* 버튼으로 꾸미기 */}
+        <Link to="/qna/register" className="w-20 h-10 text-white leading-10 text-center bg-[#ae2d33] rounded-md">등록</Link> {/* 버튼으로 꾸미기 */}
       </div>
-      </div>
-
       <ListPageComponent movePage={movePage} {...qnaList}></ListPageComponent>
     </div>
   );

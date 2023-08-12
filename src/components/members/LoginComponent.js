@@ -18,7 +18,7 @@ const LoginComponent = () => {
   const navigate = useNavigate()
 
   const errorMsg = loginState.errorMsg
-  console.log("errorMsg: " + errorMsg)
+  //console.log("errorMsg: " + errorMsg)
 
   const handleChange = (e) => {
     loginInfo[e.target.name] = e.target.value

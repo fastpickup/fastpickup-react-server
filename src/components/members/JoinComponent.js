@@ -22,7 +22,7 @@ const JoinComponent = () => {
   }
 
   const handleClickSave = async () => {
-    console.log("Sending member Create", member)
+    //console.log("Sending member Create", member)
     const result = await postMemberCreate(member)
     alert("회원 가입 완료")
     navigate("/") // return main 

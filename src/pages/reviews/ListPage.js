@@ -5,15 +5,15 @@ import useQueryObj from "../../hooks/useQueryObj";
 
 const ListPage = () => {
 
-  console.log("List Page.................")
+  //console.log("List Page.................")
 
   const {queryObj, setSearch, moveRead} = useQueryObj();
 
-  console.log(useQueryObj())
+  //console.log(useQueryObj())
 
   const movePage = (num) => {
 
-    console.log("NUM------------" + num)
+    //console.log("NUM------------" + num)
     queryObj.page = num
     setSearch({ ...queryObj })
   }

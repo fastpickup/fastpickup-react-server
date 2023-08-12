@@ -22,7 +22,7 @@ const UpdateComponent = ({ rno, moveList, moveRead }) => {
 
   useEffect(() => {
     getReivewSelectOne(rno).then((res) => {
-      console.log(res);
+      //console.log(res);
       setReview(res);
     });
   }, [rno]);

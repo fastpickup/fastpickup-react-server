@@ -49,7 +49,7 @@ const ListComponent = ({ sno, queryObj, movePage, moveRead }) => {
 
   // 전체 라이크 카운트 
   const fetchLikeCountForProduct = async (pno) => {
-    console.log("전체 상품 라이크 카운트합니다: ", pno)
+    //console.log("전체 상품 라이크 카운트합니다: ", pno)
     try {
       const response = await jwtAxios.get(`http://localhost:8081/api/like/pno/${pno}/count`);
       setLikeCounts(response.data.result);
@@ -60,7 +60,7 @@ const ListComponent = ({ sno, queryObj, movePage, moveRead }) => {
 
   // 내가 좋아요 했나 체크 
   const checkUserLikeForProduct = async (pno, email) => {
-    console.log('내가 좋아요 했나 확인합니다: ', pno, email)
+    //console.log('내가 좋아요 했나 확인합니다: ', pno, email)
     try {
       const response = await jwtAxios.get(`http://localhost:8081/api/like/pno/${pno}/${email}/check`);
       setUserLikes(prev => ({ ...prev, [pno]: response.data.liked }));

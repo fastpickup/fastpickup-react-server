@@ -2,12 +2,12 @@ import axios from "axios"
 
 // Server 로 Token Update 
 export const postUpdateTokenValue = async (newToken, email) => {
-    console.log(newToken, email)
+    //console.log(newToken, email)
     const params = {
         fcmToken: newToken,
         email: email
     };
-    console.log(params)
+    //console.log(params)
     const res = await axios.post(`http://localhost:8080/api/fcm/token`, params)
 
     return res.data;

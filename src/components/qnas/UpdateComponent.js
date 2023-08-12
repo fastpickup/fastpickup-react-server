@@ -17,7 +17,7 @@ const UpdateComponent = ({ qno, moveRead, moveList }) => {
 
   useEffect(() => {
     readQna(qno).then(data => {
-      console.log(data)
+      //console.log(data)
       setQna(data)
     })
   }, [qno])

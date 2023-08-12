@@ -21,18 +21,18 @@ const ListComponent = ({ movePage, moveRead, queryObj, categoryName }) => {
   const navigate = useNavigate();
 
   const [storeList, setStoreList] = useState({ ...initState });
- 
+
   // const { sno } = useParams();
 
   // console.log("sno", sno);
 
-  console.log("storeList: ", storeList)
-  console.log("queryObj", queryObj)
+  //console.log("storeList: ", storeList)
+  //console.log("queryObj", queryObj)
 
   // Store List 
   useEffect(() => {
     listStore(categoryName, queryObj).then(data => {
-      console.log("data", data)
+      //console.log("data", data)
       setStoreList(data)
     });
   }, [categoryName, queryObj]);
@@ -40,7 +40,7 @@ const ListComponent = ({ movePage, moveRead, queryObj, categoryName }) => {
 
   // 가맹점 상세페이지 가기
   const moveStoreRead = (sno) => {
-    console.log("Navigating to Store", sno)
+    //console.log("Navigating to Store", sno)
     navigate(`/store/read/${sno}`)
   }
 

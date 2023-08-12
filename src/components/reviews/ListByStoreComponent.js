@@ -19,7 +19,7 @@ const ListByStoreComponent = ({ sno }) => {
 
   useEffect(() => {
     getReviewByStore(sno, storeReview.page).then((res) => {
-      console.log(res);
+      //console.log(res);
 
       setStoreReview(res);
     });
@@ -27,9 +27,15 @@ const ListByStoreComponent = ({ sno }) => {
 
   const movePage = (num) => {
     storeReview.page = num;
-    console.log(storeReview.page);
+    //console.log(storeReview.page);
     setStoreReview({ ...storeReview });
   };
+
+  if(storeReview.list.length === 0){
+    return (
+      <></>
+    )
+  }
 
   return (
     <div>

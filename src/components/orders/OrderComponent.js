@@ -3,7 +3,6 @@ import { getOrderList } from "../../api/productAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { dec, inc } from "../../reducers/countSlice";
 import jwtAxios from "../../util/jwtUtil";
-import { useSelector } from "react-redux";
 import OrderButtonComponent from "./OrderButtonComponent";
 
 const initState = {
@@ -49,10 +48,10 @@ const OrderComponent = ({ pno }) => {
 
   // 전체 라이크 카운트 
   const fetchLikeCountForProduct = async (pno) => {
-    console.log("전체 상품 라이크 카운트합니다: ", pno)
+    //console.log("전체 상품 라이크 카운트합니다: ", pno)
     try {
       const response = await jwtAxios.get(`http://localhost:8081/api/like/pno/${pno}/count`);
-      console.log('전체 라이크 카운트 응닶값:',response)
+      //console.log('전체 라이크 카운트 응닶값:',response)
       setLikeCounts(response.data.result);
     } catch (error) {
       console.error("Error fetching like count for product:", pno, error);
@@ -60,7 +59,7 @@ const OrderComponent = ({ pno }) => {
   };
   // 내가 좋아요 했나 체크 
   const checkUserLikeForProduct = async (pno, email) => {
-    console.log('내가 좋아요 했나 확인합니다: ', pno, email)
+    //console.log('내가 좋아요 했나 확인합니다: ', pno, email)
     try {
       const response = await jwtAxios.get(`http://localhost:8081/api/like/pno/${pno}/${email}/check`);
       setUserLikes(response.data.liked);
@@ -97,7 +96,7 @@ const OrderComponent = ({ pno }) => {
   }
 
   useEffect(() => {
-    console.log('Like count updated:', likeCounts);
+    //console.log('Like count updated:', likeCounts);
   }, [likeCounts]);
 
   return (
@@ -123,14 +122,14 @@ const OrderComponent = ({ pno }) => {
             <span>가격</span>
             <span>{(order.productPrice).toLocaleString()}원</span>
           </div>
-          <div className="like-section" onClick={toggleLikeForProduct}>
-            <span>Like: {likeCounts}</span>
-            <span>Like: {userLikes ? "Like 했어요!" : ""}</span>
-          </div>
         </div>
       </div>
       <div className="fixed left-0 w-full px-3 box-border">
         <div className="flex justify-between items-center h-[60px]">
+          <div className="like-section" onClick={toggleLikeForProduct}>
+            {userLikes ? <img src={require(`../../images/like_icon_on.png`)} className="inline-block w-[24px] bg-[#ae2d33]" /> : <img src={require(`../../images/like_icon.png`)} className="inline-block w-[24px]" />}
+            {/* <span className="text-[16px] font-normal ml-1">{likeCounts}</span> */}
+          </div>
           <div className="wi-[110px] h-[40px] flex items-center border border-[#757575] rounded-lg">
             <button
               onClick={handleClickDec}

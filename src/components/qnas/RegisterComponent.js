@@ -14,7 +14,7 @@ const RegisterComponent = () => {
 
   const {email} = useSelector(state => state.login)
 
-  console.log(email)
+  //console.log(email)
 
   // 오류나지 않게 초기값 설정
   const [qna, setQna] = useState({ ...initState })
@@ -33,7 +33,7 @@ const RegisterComponent = () => {
   const handleClickRegist = (e) => {
 
     createQna(qna).then(data => {
-      console.log(data)
+      //console.log(data)
 
       alert("등록되었습니다.")
 

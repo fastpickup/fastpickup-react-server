@@ -52,7 +52,7 @@ const token = getCookie("Token");
   };
 
   return (
-    <div className="w-[calc(100%-125px)] h-[50px] bg-[#ae2d33] rounded-lg">
+    <div className="w-[calc(100%-150px)] h-[50px] bg-[#ae2d33] rounded-lg">
       <button
         className="block text-center w-full px-3 leading-[50px] text-lg text-white font-medium"
         onClick={handlePayment}
