@@ -33,58 +33,49 @@ const ListByStoreComponent = ({ sno }) => {
 
   if(storeReview.list.length === 0){
     return (
-      <></>
+      <div className="my-10 text-center text-xl">
+        등록된 리뷰가 없습니다.
+      </div>
     )
   }
 
   return (
     <div>
-      <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc] mt-5">
-        리뷰
-      </div>
-      {storeReview.list.map(
-        ({
-          rno,
-          gno,
-          email,
-          reviewContent,
-          reviewTitle,
-          fileNames,
-          reviewDate,
-        }) => (
-          <div
-            className={`p-4 border rounded-lg mb-4 ${
-              rno === gno ? "bg-white" : "bg-gray-200"
-            } ${rno !== gno ? "ml-6" : ""}`}
-            key={rno}
-          >
-            <div className="mb-2 flex justify-between items-center">
-              <span className="text-sm text-gray-600 font-semibold">
-                {rno !== gno ? "사장님" : email}
-              </span>
-              <span className="text-sm text-gray-600">{reviewDate.split('T')[0]}</span>
-            </div>
-            {fileNames.length > 0 && (
-              <div className="mb-2">
-                <ul className="list-none flex flex-wrap gap-2">
+      <ul>
+        {storeReview.list.map(
+          ({ rno, gno, email, reviewContent, reviewTitle, fileNames, reviewDate }) => (
+            <li
+              className={`my-3 py-3 border-b border-[#eee] ${
+                rno === gno ? "bg-white" : "bg-gray-200"
+              } ${rno !== gno ? "ml-3 px-3 pb-4 rounded-md" : ""}`}
+              key={rno}
+            >
+              <div className="flex justify-between">
+                <div className="w-[calc(100%-100px)]">
+                  <div className="mt-1 text-[15px] font-normal text-[#5f5f5f]">
+                    {rno !== gno ? "사장님" : email}
+                  </div>
+                  <div className="text-[17px] font-medium">
+                    {reviewContent}
+                  </div>
+                </div>
+                <div className="w-[90px]">
+                  <p className="text-sm leading-6 text-gray-900">{reviewDate.split('T')[0]}</p>
+                </div>
+              </div>
+              {fileNames.length > 0 && (
+                <ul className="mt-3 overflow-x-auto overflow-y-hidden whitespace-nowrap">
                   {fileNames.map((fname, idx) => (
-                    <li key={idx}>
-                      <img
-                        src={`http://localhost/${fname}`}
-                        alt={`Review Image ${idx}`}
-                        className="w-20 h-20 object-cover rounded-md border"
-                      />
+                    <li key={idx} className="inline-block h-[120px] overflow-hidden">
+                      <img src={`http://192.168.0.64/${fname}`} className="w-[120px]"/>
                     </li>
                   ))}
                 </ul>
-              </div>
-            )}
-            <div>
-              <p className="text-sm text-gray-800">{reviewContent}</p>
-            </div>
-          </div>
-        )
-      )}
+              )}
+            </li>
+          )
+        )}
+      </ul>
       <ListPageComponent
         {...storeReview}
         movePage={movePage}
