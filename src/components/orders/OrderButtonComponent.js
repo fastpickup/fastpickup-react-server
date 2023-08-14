@@ -5,11 +5,11 @@ import { createSearchParams } from "react-router-dom";
 import { getCookie } from "../../util/cookieUtil";
 import { createFcmOrderAndToken } from "../../api/fcmTokenAPI";
 
-const OrderButtonComponent = ({pno, sno, productPrice, email}) => {
+const OrderButtonComponent = ({pno, sno, productPrice, email, countQty}) => {
 
   const token = getCookie("Token");
 
-  const count = useSelector(state => state.count)
+  //const count = useSelector(state => state.count)
   const userEmail = useSelector(state => state.login)
   
   // console.log("어드민 이메일:", email)
@@ -28,7 +28,7 @@ const OrderButtonComponent = ({pno, sno, productPrice, email}) => {
   }
 
   const handlePayment = () => {
-    const payState = {pno, sno, email: userEmail.email, total: (productPrice * count.qty), orderCount: count.qty}
+    const payState = {pno, sno, email: userEmail.email, total: (productPrice * countQty.qty), orderCount: countQty.qty}
     //console.log(payState)
     const queryString = createSearchParams(payState).toString();
     axios.post(`http://localhost:8081/kakaoPay/pay?${queryString}`).then(response => {
@@ -47,7 +47,7 @@ const OrderButtonComponent = ({pno, sno, productPrice, email}) => {
         className="block text-center w-full px-3 leading-[50px] text-lg text-white font-medium"
         onClick={handlePayment}
       >
-        <span className="text-xl">{(productPrice * count.qty).toLocaleString()}</span> 결제
+        <span className="text-xl">{(productPrice * countQty.qty).toLocaleString()}</span> 결제
       </button>
     </div>
   );

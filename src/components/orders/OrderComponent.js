@@ -22,15 +22,20 @@ const initLikeState = {
   state: false
 }
 
+const initQty = {
+  qty: 1
+}
+
 const OrderComponent = ({ pno }) => {
 
   const [order, setOrder] = useState(initState)
 
-  const count = useSelector(state => state.count)
+  //const count = useSelector(state => state.count)
   // Like 
   const [likeCounts, setLikeCounts] = useState(false);
   const [likeState, setLikeState] = useState(initLikeState)
   const [userLikes, setUserLikes] = useState(false);
+  const [countQty, setCountQry] = useState({...initQty})
   const { email } = useSelector(state => state.login);
 
   //console.log('오더컴포넌트',order)
@@ -88,11 +93,22 @@ const OrderComponent = ({ pno }) => {
   //console.log(order)
 
   const handleClickInc = () => {
-    dispatch(inc(1))
+    //dispatch(inc(1))
+    //console.log(countQty.qty)
+    if(countQty.qty > 9){
+      return
+    }
+    countQty.qty += 1
+    setCountQry({...countQty})
   }
 
   const handleClickDec = () => {
-    dispatch(dec(1))
+    //dispatch(dec(1))
+    if(countQty.qty < 2){
+      return
+    }
+    countQty.qty -= 1
+    setCountQry({...countQty})
   }
 
   useEffect(() => {
@@ -137,7 +153,7 @@ const OrderComponent = ({ pno }) => {
             >
               <span className="block w-4 h-[2px] mx-auto bg-black"></span>
             </button>
-            <span className="w-11 text-center text-black">{count.qty}</span>
+            <span className="w-11 text-center text-black">{countQty.qty}</span>
             <button
               onClick={handleClickInc}
               className="relative block w-8 h-full border-l border-[#757575]"
@@ -146,7 +162,7 @@ const OrderComponent = ({ pno }) => {
               <span className="absolute left-1/2 top-1/2 rotate-90 w-4 h-[2px] mx-auto bg-black -translate-x-1/2 -translate-y-1/2"></span>
             </button>
           </div>
-          <OrderButtonComponent {...order}></OrderButtonComponent>
+          <OrderButtonComponent {...order} countQty={countQty}></OrderButtonComponent>
         </div>
       </div>
 

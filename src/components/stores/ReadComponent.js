@@ -67,7 +67,7 @@ const ReadComponent = () => {
     jwtAxios.get(`http://localhost:8081/api/map/getMapData?query=${readStore.storeAddress}`)
       .then(response => {
         const data = response.data;
-        console.log("Response Data:", data); // 데이터 확인
+        // console.log("Response Data:", data); // 데이터 확인
         if (data.documents && data.documents[0]) {
           const position = {
             x: data.documents[0].x,
@@ -75,11 +75,11 @@ const ReadComponent = () => {
           };
           setMapPosition(position);
           // x와 y 값을 출력
-          console.log("x:", position.x);
-          console.log("y:", position.y);
+          // console.log("x:", position.x);
+          // console.log("y:", position.y);
         }
         setIsDataFetched(true);
-        console.log('카카오맵 데이터:', data);
+        // console.log('카카오맵 데이터:', data);
       })
       .catch(error => {
         console.error("API 호출 중 에러 발생:", error);
