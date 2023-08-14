@@ -58,20 +58,20 @@ const MyComponent = () => {
     const app = initializeApp(firebaseConfig);
     const messaging = getMessaging(app);
 
-    console.log("app", app)
-    console.log("메시지", messaging)
+    //console.log("app", app)
+    //console.log("메시지", messaging)
     // 로컬 스토리지에서 토큰 존재 여부 확인
     const existingToken = localStorage.getItem('fcmToken');
 
-    console.log("existingToken",existingToken)
+    //console.log("existingToken",existingToken)
     if (existingToken) {
       deleteToken(messaging, existingToken).then(() => {
-        console.log(messaging, "삭제요청")
+        //console.log(messaging, "삭제요청")
         getTokenAndSend(messaging, email);
       });
     } else {
       // 최초 로그인 시 토큰 발급
-      console.log("최초발급")
+      //console.log("최초발급")
       getTokenAndSend(messaging, email);
     }
   }, []);
@@ -80,8 +80,8 @@ const MyComponent = () => {
   const getTokenAndSend = (messaging, email) => {
     getToken(messaging, { vapidKey: 'BM5dOQVKVrBlXo4fzzTzbAoY_2KbPLNl0Q2txRKBBVa69k5d0iP0Wxgip-1z9gNSqkI86VXcCQT7lMU9nHBqFDg' })
       .then((newToken) => {
-        console.log('New token:', newToken);
-        console.log('EMAIL', email);
+        //console.log('New token:', newToken);
+        //console.log('EMAIL', email);
         postUpdateTokenValue(newToken, email);
       })
       .catch((err) => {

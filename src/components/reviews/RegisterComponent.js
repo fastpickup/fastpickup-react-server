@@ -58,18 +58,18 @@ const RegisterComponent = ({moveList}) => {
       formData.append("files", file)
     }
 
-    console.dir(fileRef.current);
+    //console.dir(fileRef.current);
 
     // uploadFile 함수를 호출하여 파일 업로드
     uploadFile(formData)
       .then((res) => {
         const result = res
-        console.log(result)
+        //console.log(result)
 
         const link = result.map((item) => item.link);
         const upDatefileNames = link.map((link) => link.substring(2)) // "s_" 제외한 부분 추출
 
-        console.log(upDatefileNames)
+        //console.log(upDatefileNames)
         const updatedFileNames = [...review.fileNames, ...upDatefileNames]
 
         // 상태 업데이트
@@ -107,7 +107,7 @@ const RegisterComponent = ({moveList}) => {
             name="reviewContent"
             value={review.reviewContent}
             onChange={handleChange}
-            className="w-full h-[100px] px-2 border border-[#ccc] resize-none"
+            className="w-full h-[100px] p-2 border border-[#ccc] resize-none"
           />
         </dd>
         <dt className="mt-5">이미지</dt>

@@ -9,7 +9,7 @@ const categorySlice = createSlice({
   initialState: initState,
   reducers: {
     storeList: (state, param) => {
-      console.log("storeList....", param.payload)
+      //console.log("storeList....", param.payload)
       return {categoryName: param.payload}
     }
   }

@@ -42,8 +42,12 @@ const ReadComponent = () => {
 
   return (
     <div>
-      <div className="py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc]">
+      <div className="relative py-3 text-center text-xl font-semibold leading-normal border-b border-[#ccc]">
         {readStore.storeName}
+        <div className="absolute right-1 top-1/2 -translate-y-1/2">
+          <img src={require(`../../images/like_icon_on.png`)} className="inline-block w-[24px] bg-[#ae2d33]" />
+          <span className="text-[16px] font-normal ml-1">{likeCount}</span>
+        </div>
       </div>
       <dl className="mt-3">
         <dt className="inline-block text-[18px] font-medium">
@@ -59,15 +63,6 @@ const ReadComponent = () => {
         </dt>
         <dd className="inline-block text-[17px] ml-2">
           {readStore.storeAddress}
-        </dd>
-      </dl>
-      <dl className="pb-3 flex items-center">
-        <dt className="text-[18px] font-medium">
-          가맹점 좋아요 :
-        </dt>
-        <dd className="text-[17px] ml-2 flex items-center">
-          {likeCount}
-          <i className="ml-1 text-red-500 fas fa-heart"></i>
         </dd>
       </dl>
       <div>

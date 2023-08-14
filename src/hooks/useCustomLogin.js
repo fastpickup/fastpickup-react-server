@@ -19,7 +19,7 @@ const useCustomLogin = (fn) => {
             return
         }
 
-        console.log("signed:" + loginInfo.email)
+        //console.log("signed:" + loginInfo.email)
         if (!loginInfo.email) {
             navigate("/member/login")
         }

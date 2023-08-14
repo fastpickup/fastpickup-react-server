@@ -5,7 +5,7 @@ const CompletePage = () => {
 
   const {email} = useSelector(state => state.login)
 
-  console.log(email)
+  //console.log(email)
 
   return (
     <div>

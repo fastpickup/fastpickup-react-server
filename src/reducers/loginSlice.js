@@ -35,7 +35,7 @@ const loginSlice = createSlice({
   reducers: {
     requestSignOut: (state, action) => {
       const payload = action.payload
-      console.log("signOut: ", payload)
+      //console.log("signOut: ", payload)
       removeCookie("login")
       return initState
     }

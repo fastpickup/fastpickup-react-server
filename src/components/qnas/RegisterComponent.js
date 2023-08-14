@@ -14,7 +14,7 @@ const RegisterComponent = () => {
 
   const {email} = useSelector(state => state.login)
 
-  console.log(email)
+  //console.log(email)
 
   // 오류나지 않게 초기값 설정
   const [qna, setQna] = useState({ ...initState })
@@ -33,7 +33,7 @@ const RegisterComponent = () => {
   const handleClickRegist = (e) => {
 
     createQna(qna).then(data => {
-      console.log(data)
+      //console.log(data)
 
       alert("등록되었습니다.")
 
@@ -43,37 +43,35 @@ const RegisterComponent = () => {
 
   return (
     <div>
-        <div className="m-2">
-          <div className="text-xl font-bold">
-            문의 제목
-          </div>
+      <dl>
+        <dt className="mt-5">제목</dt>
+        <dd className="mt-2">
           <input
             type="text"
             name="qnaTitle"
             value={qna.qnaTitle}
             onChange={handleChange}
-            className="border p-2 rounded w-full mt-2"
-            placeholder="입력해주세요."
+            className="w-full h-10 px-2 border border-[#ccc]"
           />
-        </div>
-        <div className="m-2 mt-4">
-          <div className="text-xl font-bold">
-            문의 내용
-          </div>
+        </dd>
+        <dt className="mt-5">내용</dt>
+        <dd className="mt-2">
           <textarea
             name="qnaContent"
             value={qna.qnaContent}
             onChange={handleChange}
-            className="border p-2 rounded w-full h-32 mt-2"
-            placeholder="입력해주세요."
+            className="w-full h-[100px] p-2 border border-[#ccc] resize-none"
           />
-        </div>
+        </dd>
+      </dl>
+      <div className="flex justify-end mt-5">
         <button
-          className="m-2 py-2 px-4 bg-blue-500 text-white font-semibold rounded"
+          className="w-20 h-10 text-white bg-[#ae2d33] rounded-md"
           onClick={handleClickRegist}
         >
-          문의 등록
+          등록
         </button>
+      </div>
     </div>
   );
 }

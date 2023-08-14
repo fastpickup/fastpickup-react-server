@@ -8,7 +8,7 @@ const ListPage = () => {
 
       // 페이지 넘어가는 함수
       const movePage= (num) => {
-          console.log(num)
+          //console.log(num)
           
           // 가져온 num 값으로 페이지를 변경하는 상태로 변경하자
           queryObj.page = num

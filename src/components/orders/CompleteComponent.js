@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { readMyOrderAndHistory } from "../../api/orderAPI";
+import { createFcmOrderAndToken } from "../../api/fcmTokenAPI";
+import { useSelector } from "react-redux";
 
 const initState = {
   ono: 0,
@@ -15,20 +17,35 @@ const initState = {
   fileName: [],
 };
 
+
 const CompleteComponent = () => {
   const { ono } = useParams();
 
   const [readOrder, setReadOrder] = useState(initState);
 
   const navigate = useNavigate();
+  
+  const {email} = useSelector(state => state.login)
+  
+  const message = {
+    email: email,
+    title: "주문 접수 알람",
+    body: "주문이 접수 되었습니다."
+  }
 
   useEffect(() => {
     //console.log("ono", ono);
     readMyOrderAndHistory(ono).then((res) => {
-      console.log("내 주문정보 데이터: ", res);
+      //console.log("내 주문정보 데이터: ", res);
       const updatedOrder = { ...res.result, fileName: [res.result.fileName] };
       // const updatedOrder = { ...res.result, fileName: [res.result.fileName] };
       setReadOrder(updatedOrder);
+    });
+    createFcmOrderAndToken(message).then(response => {
+      //console.log('FCM message sent successfully:', response); // 성공 응답 출력
+    })
+    .catch(error => {
+      console.error('There was an error sending the FCM message:', error);
     });
   }, [ono]);
 
