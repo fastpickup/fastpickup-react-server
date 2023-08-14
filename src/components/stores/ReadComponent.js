@@ -22,6 +22,11 @@ const ReadComponent = () => {
 
   const [readStore, setReadStore] = useState(initState)
   const [likeCount, setLikeCount] = useState(0);
+  const [tabIndex, setTabIndex] = useState(0)
+
+  const handleClickTab = (idx) => {
+    setTabIndex(idx)
+  }
 
 
   useEffect(() => {
@@ -39,6 +44,17 @@ const ReadComponent = () => {
     queryObj.page = num
     setSearch({ ...queryObj })
   }
+
+  const tabContArr = [
+    {
+      tabTitle: "상품",
+      tabContent: (<ListComponent sno={sno} queryObj={queryObj} movePage={movePage} moveRead={moveRead}></ListComponent>)
+    },
+    {
+      tabTitle: "리뷰",
+      tabContent: (<ListByStoreComponent sno={sno}></ListByStoreComponent>)
+    }
+  ]
 
   return (
     <div>
@@ -65,15 +81,21 @@ const ReadComponent = () => {
           {readStore.storeAddress}
         </dd>
       </dl>
+      <ul className="flex border-b border-[#ddd]">
+        {tabContArr.map((data, idx) => 
+          <li
+            className={`w-1/2 h-10 flex justify-center items-center text-[17px] border-l first:border-0
+            ${idx === tabIndex ? "text-[#ae2d33] font-semibold" : "text-[#757575]"}`}
+            key={idx}
+            onClick={() => handleClickTab(idx)}
+          >
+            {data.tabTitle}
+          </li>
+        )}
+      </ul>
       <div>
-        <ListComponent
-          sno={sno}
-          queryObj={queryObj}
-          movePage={movePage}
-          moveRead={moveRead}
-        ></ListComponent>
+        {tabContArr[tabIndex].tabContent}
       </div>
-      <ListByStoreComponent sno={sno}></ListByStoreComponent>
     </div>
   );
 }
