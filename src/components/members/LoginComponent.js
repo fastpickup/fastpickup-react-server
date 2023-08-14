@@ -25,6 +25,8 @@ const LoginComponent = () => {
     setloginInfo({ ...loginInfo })
   }
 
+  console.log(errorMsg)
+
 
   return (
     <div>

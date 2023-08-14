@@ -47,7 +47,7 @@ const ReadComponent = ({ rno, moveUpdate, moveList }) => {
               className="inline-block ml-2 first:ml-0 w-[130px] h-[130px] border border-[#eee] rounded-md overflow-hidden"
             >
               <img
-                src={`http://localhost/${fname}`}
+                src={`http://192.168.0.64/${fname}`}
                 className="w-[130px]"
               />
             </li>
