@@ -3,7 +3,6 @@ import { getOrderList } from "../../api/productAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { dec, inc } from "../../reducers/countSlice";
 import jwtAxios from "../../util/jwtUtil";
-import { useSelector } from "react-redux";
 import OrderButtonComponent from "./OrderButtonComponent";
 
 const initState = {
